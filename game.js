@@ -448,8 +448,6 @@ function onDragStart(e, piece, element) {
     if (gameState.isCompleted) return;
     e.preventDefault();
 
-    const board = document.getElementById('puzzle-board');
-    const boardRect = board.getBoundingClientRect();
     const pieceRect = element.getBoundingClientRect();
 
     // Store drag state
@@ -606,6 +604,14 @@ function onWin() {
         document.getElementById('stat-time').textContent = formatTime(gameState.seconds);
         document.getElementById('stat-difficulty').textContent = diffLabel;
 
+        // HD download only for Experto (6×6)
+        const btnDownload = document.getElementById('btn-download');
+        if (gameState.gridSize === 6) {
+            btnDownload.style.display = '';
+        } else {
+            btnDownload.style.display = 'none';
+        }
+
         showScreen('win');
         createConfetti();
     }, 500);
@@ -699,6 +705,7 @@ function hideHint() {
 // DOWNLOAD
 // ==========================================
 function downloadImage() {
+    if (gameState.gridSize !== 6) return;
     const landscape = gameState.selectedLandscape;
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
