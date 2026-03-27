@@ -6,8 +6,8 @@
 // CONFIG
 // ==========================================
 const UNSPLASH_ACCESS_KEY = 'Jxev90HPjzslJ7p06qmOmEILjjHYmKZaWDPWYJQVNBQ';
-const UNSPLASH_CACHE_KEY = 'puzzle_unsplash_cache_v3';
-const UNSPLASH_PARAMS = '&w=800&h=800&q=85&fit=crop&crop=attention&auto=format';
+const UNSPLASH_CACHE_KEY = 'puzzle_unsplash_cache_v4';
+const UNSPLASH_PARAMS = '?w=800&h=800&q=85&fit=crop&crop=attention&auto=format';
 
 // Cache in memory + localStorage
 const photoCache = JSON.parse(localStorage.getItem(UNSPLASH_CACHE_KEY) || '{}');
@@ -25,7 +25,7 @@ async function imgUrl(slug) {
         );
         if (!res.ok) throw new Error('fetch failed');
         const data = await res.json();
-        const url = data.urls.regular + UNSPLASH_PARAMS;
+        const url = data.urls.raw + UNSPLASH_PARAMS;
         photoCache[slug] = url;
         saveCache();
         return url;
