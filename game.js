@@ -1,106 +1,147 @@
 /* ========================================
-   🎮 Puzzle Sudamérica - Game Logic
+   🎮 Puzzle Sudamérica - Game Logic v2
    ======================================== */
 
 // ==========================================
-// DATA: Temas y Paisajes
+// CONFIG
 // ==========================================
-const THEMES = {
-    argentina: {
-        id: 'argentina',
-        name: 'Argentina',
-        flag: '🇦🇷',
-        badge: '🇦🇷 ARGENTINA',
-        heroTitle: 'Paisajes Argentinos',
-        subtitle: 'Descubrí la belleza de Argentina armando increíbles rompecabezas fotográficos',
-        accentHue: 210,       // Blue
+const UNSPLASH_PARAMS = '?w=900&q=85&fit=crop&crop=entropy&auto=format';
+
+function imgUrl(photoId) {
+    return `https://images.unsplash.com/photo-${photoId}${UNSPLASH_PARAMS}`;
+}
+
+// ==========================================
+// DATA
+// ==========================================
+const CATEGORIES = {
+    paisajes: {
+        id: 'paisajes',
+        name: 'Paisajes',
+        icon: '🏔️',
+        description: 'Maravillas naturales del continente',
         gradientFrom: '#3b82f6',
         gradientTo: '#8b5cf6',
-        landscapes: [
-            {
-                id: 'perito_moreno',
-                name: 'Glaciar Perito Moreno',
-                location: 'Santa Cruz, Patagonia',
-                image: 'images/perito_moreno.png',
-                description: 'Uno de los glaciares más impresionantes del mundo'
-            },
-            {
-                id: 'iguazu_falls',
-                name: 'Cataratas del Iguazú',
-                location: 'Misiones',
-                image: 'images/iguazu_falls.png',
-                description: 'Maravilla natural del mundo'
-            },
-            {
-                id: 'fitz_roy',
-                name: 'Monte Fitz Roy',
-                location: 'El Chaltén, Patagonia',
-                image: 'images/fitz_roy.png',
-                description: 'La capital del trekking de Argentina'
-            },
-            {
-                id: 'quebrada_humahuaca',
-                name: 'Quebrada de Humahuaca',
-                location: 'Jujuy',
-                image: 'images/quebrada_humahuaca.png',
-                description: 'Cerro de los Siete Colores'
-            },
-            {
-                id: 'bariloche_lakes',
-                name: 'Lago Nahuel Huapi',
-                location: 'Bariloche, Patagonia',
-                image: 'images/bariloche_lakes.png',
-                description: 'La Suiza argentina'
-            }
-        ]
     },
-    brasil: {
-        id: 'brasil',
-        name: 'Brasil',
-        flag: '🇧🇷',
-        badge: '🇧🇷 BRASIL',
-        heroTitle: 'Paisajes Brasileños',
-        subtitle: 'Descubrí la belleza de Brasil armando increíbles rompecabezas fotográficos',
-        accentHue: 140,       // Green
+    animales: {
+        id: 'animales',
+        name: 'Animales',
+        icon: '🦁',
+        description: 'Fauna única de Sudamérica',
         gradientFrom: '#10b981',
         gradientTo: '#f59e0b',
-        landscapes: [
-            {
-                id: 'cristo_redentor',
-                name: 'Cristo Redentor',
-                location: 'Río de Janeiro',
-                image: 'images/cristo_redentor.png',
-                description: 'Icono de Brasil y maravilla del mundo moderno'
-            },
-            {
-                id: 'lencois_maranhenses',
-                name: 'Lençóis Maranhenses',
-                location: 'Maranhão',
-                image: 'images/lencois_maranhenses.png',
-                description: 'Dunas blancas con lagunas cristalinas'
-            },
-            {
-                id: 'fernando_noronha',
-                name: 'Fernando de Noronha',
-                location: 'Pernambuco',
-                image: 'images/fernando_noronha.png',
-                description: 'Archipiélago paradisíaco del Atlántico'
-            },
-            {
-                id: 'amazonia',
-                name: 'Selva Amazónica',
-                location: 'Amazonas',
-                image: 'images/amazonia.png',
-                description: 'El pulmón verde del planeta'
-            },
-            {
-                id: 'chapada_diamantina',
-                name: 'Chapada Diamantina',
-                location: 'Bahía',
-                image: 'images/chapada_diamantina.png',
-                description: 'Mesetas, cuevas y cascadas espectaculares'
-            }
-        ]
+    },
+    ciudades: {
+        id: 'ciudades',
+        name: 'Ciudades',
+        icon: '🏙️',
+        description: 'Metrópolis e historia viva',
+        gradientFrom: '#ef4444',
+        gradientTo: '#f59e0b',
+    }
+};
+
+const IMAGES = {
+    paisajes: {
+        argentina: {
+            flag: '🇦🇷', name: 'Argentina',
+            items: [
+                { id: 'perito_moreno', name: 'Glaciar Perito Moreno', location: 'Santa Cruz, Patagonia', photo: 'V34MPSwaK7k' },
+                { id: 'iguazu', name: 'Cataratas del Iguazú', location: 'Misiones', photo: 'sK2s73nZwz0' },
+                { id: 'fitz_roy', name: 'Monte Fitz Roy', location: 'El Chaltén, Patagonia', photo: 'HazDeRk87oA' },
+                { id: 'nahuel_huapi', name: 'Lago Nahuel Huapi', location: 'Bariloche, Patagonia', photo: 'K_zV9qD53ZY' },
+            ]
+        },
+        brasil: {
+            flag: '🇧🇷', name: 'Brasil',
+            items: [
+                { id: 'cristo', name: 'Cristo Redentor', location: 'Río de Janeiro', photo: 'eVMLVyrf4g4' },
+                { id: 'lencois', name: 'Lençóis Maranhenses', location: 'Maranhão', photo: 'lOXd57n2hHU' },
+                { id: 'noronha', name: 'Fernando de Noronha', location: 'Pernambuco', photo: 'PUiEolgEgaE' },
+                { id: 'amazonia', name: 'Selva Amazónica', location: 'Amazonas', photo: 'AycIWyyCuVo' },
+            ]
+        },
+        chile: {
+            flag: '🇨🇱', name: 'Chile',
+            items: [
+                { id: 'torres', name: 'Torres del Paine', location: 'Patagonia chilena', photo: 'rlHAG9QcldI' },
+                { id: 'atacama', name: 'Desierto de Atacama', location: 'Región de Antofagasta', photo: 'Qc6EZC7NWWw' },
+                { id: 'valle_luna', name: 'Valle de la Luna', location: 'Atacama', photo: 'TrWxMFWvk4Y' },
+                { id: 'pascua', name: 'Isla de Pascua', location: 'Rapa Nui', photo: 'thwOv7I363Y' },
+            ]
+        },
+        uruguay: {
+            flag: '🇺🇾', name: 'Uruguay',
+            items: [
+                { id: 'polonio', name: 'Cabo Polonio', location: 'Rocha', photo: 'FAqQVlNeSUg' },
+                { id: 'punta', name: 'Punta del Este', location: 'Maldonado', photo: 'jHz2WyDBVyo' },
+            ]
+        },
+        colombia: {
+            flag: '🇨🇴', name: 'Colombia',
+            items: [
+                { id: 'cocora', name: 'Valle del Cocora', location: 'Quindío', photo: 'akkbyynQtEg' },
+                { id: 'tayrona', name: 'Parque Tayrona', location: 'Magdalena', photo: 'gc5OYAll-rc' },
+                { id: 'cartagena_walls', name: 'Ciudad Amurallada', location: 'Cartagena', photo: 'PM95XBE1Xxk' },
+            ]
+        },
+        peru: {
+            flag: '🇵🇪', name: 'Perú',
+            items: [
+                { id: 'machu_picchu', name: 'Machu Picchu', location: 'Cusco', photo: 'gQzlCU9_ItA' },
+                { id: 'rainbow', name: 'Montaña de Colores', location: 'Cusco', photo: 'kTbZ0n9MzqI' },
+                { id: 'huacachina', name: 'Huacachina', location: 'Ica', photo: 'Q-bULd2CYds' },
+            ]
+        }
+    },
+    animales: {
+        sudamerica: {
+            flag: '🌎', name: 'Sudamérica',
+            items: [
+                { id: 'jaguar', name: 'Jaguar', location: 'Amazonía', photo: 'eRWokxnP4t0' },
+                { id: 'tucan', name: 'Tucán', location: 'Selva tropical', photo: 'yBhhxfMMMyU' },
+                { id: 'tapir', name: 'Tapir', location: 'Amazonia', photo: '1m8mdst8JTE' },
+                { id: 'condor', name: 'Cóndor Andino', location: 'Andes', photo: 'fGvDhUKTdUc' },
+                { id: 'capibara', name: 'Capibara', location: 'Humedales', photo: 'bt09Cs3UthM' },
+                { id: 'pinguino', name: 'Pingüino de Magallanes', location: 'Patagonia', photo: 'h2acydK6n8A' },
+                { id: 'llama', name: 'Llama', location: 'Andes', photo: 'BtoWJ8jdWEo' },
+            ]
+        }
+    },
+    ciudades: {
+        argentina: {
+            flag: '🇦🇷', name: 'Argentina',
+            items: [
+                { id: 'obelisco', name: 'Obelisco', location: 'Buenos Aires', photo: 'ekA3fTefJMA' },
+                { id: 'caminito', name: 'Caminito', location: 'La Boca, Buenos Aires', photo: 'fl3fdbbtj4Q' },
+                { id: 'puerto_madero', name: 'Puerto Madero', location: 'Buenos Aires', photo: 'VXSlXVlLLY4' },
+            ]
+        },
+        brasil: {
+            flag: '🇧🇷', name: 'Brasil',
+            items: [
+                { id: 'pelourinho', name: 'Pelourinho', location: 'Salvador, Bahía', photo: 'BGD47PMGzyM' },
+            ]
+        },
+        chile: {
+            flag: '🇨🇱', name: 'Chile',
+            items: [
+                { id: 'santiago', name: 'Santiago', location: 'Región Metropolitana', photo: 'QH3rBhcJS54' },
+            ]
+        },
+        colombia: {
+            flag: '🇨🇴', name: 'Colombia',
+            items: [
+                { id: 'bogota', name: 'Bogotá', location: 'Cundinamarca', photo: 'gdcT7prXMzE' },
+            ]
+        },
+        peru: {
+            flag: '🇵🇪', name: 'Perú',
+            items: [
+                { id: 'cusco', name: 'Cusco', location: 'Plaza de Armas', photo: '2LydtNCRBv8' },
+                { id: 'lima', name: 'Lima Miraflores', location: 'Lima', photo: 'JvxnQV_gaO8' },
+            ]
+        }
     }
 };
 
@@ -116,8 +157,9 @@ const DIFFICULTIES = {
 // ==========================================
 let gameState = {
     currentScreen: 'home',
-    currentTheme: 'argentina',
-    selectedLandscape: null,
+    currentCategory: null,
+    currentCountry: null,
+    selectedImage: null,
     gridSize: 3,
     pieces: [],
     selectedPiece: null,
@@ -125,13 +167,10 @@ let gameState = {
     timer: null,
     seconds: 0,
     isCompleted: false,
-    // Drag state
     isDragging: false,
     dragPiece: null,
     dragElement: null,
     dragClone: null,
-    dragStartX: 0,
-    dragStartY: 0,
     dragOffsetX: 0,
     dragOffsetY: 0
 };
@@ -141,36 +180,18 @@ let gameState = {
 // ==========================================
 const screens = {
     home: document.getElementById('home-screen'),
+    country: document.getElementById('country-screen'),
     select: document.getElementById('select-screen'),
     game: document.getElementById('game-screen'),
     win: document.getElementById('win-screen')
 };
 
 // ==========================================
-// THEME HELPERS
-// ==========================================
-function getCurrentTheme() {
-    return THEMES[gameState.currentTheme];
-}
-
-function getCurrentLandscapes() {
-    return getCurrentTheme().landscapes;
-}
-
-function applyThemeColors(theme) {
-    const root = document.documentElement;
-    root.style.setProperty('--accent-primary', theme.gradientFrom);
-    root.style.setProperty('--gradient-primary', `linear-gradient(135deg, ${theme.gradientFrom}, ${theme.gradientTo})`);
-    root.style.setProperty('--shadow-glow', `0 0 30px ${theme.gradientFrom}40`);
-}
-
-// ==========================================
 // INITIALIZATION
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     initParticles();
-    initThemeSelector();
-    updateHomeForTheme();
+    renderCategoryCards();
     initEventListeners();
 });
 
@@ -192,77 +213,91 @@ function initParticles() {
 }
 
 // ==========================================
-// THEME SELECTOR
+// CATEGORY CARDS (Home)
 // ==========================================
-function initThemeSelector() {
-    const themeBtns = document.querySelectorAll('.theme-btn');
-    themeBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const themeId = btn.dataset.theme;
-            if (themeId === gameState.currentTheme) return;
+function renderCategoryCards() {
+    const container = document.getElementById('category-cards');
+    container.innerHTML = '';
 
-            // Update active state
-            themeBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            // Switch theme
-            gameState.currentTheme = themeId;
-            updateHomeForTheme();
-        });
+    Object.values(CATEGORIES).forEach((cat, index) => {
+        const card = document.createElement('div');
+        card.className = 'category-card';
+        card.style.animationDelay = `${index * 0.15}s`;
+        card.style.setProperty('--cat-from', cat.gradientFrom);
+        card.style.setProperty('--cat-to', cat.gradientTo);
+        card.innerHTML = `
+            <div class="category-card-icon">${cat.icon}</div>
+            <div class="category-card-name">${cat.name}</div>
+            <div class="category-card-desc">${cat.description}</div>
+            <div class="category-card-arrow">→</div>
+        `;
+        card.addEventListener('click', () => selectCategory(cat.id));
+        container.appendChild(card);
     });
 }
 
-function updateHomeForTheme() {
-    const theme = getCurrentTheme();
+// ==========================================
+// CATEGORY SELECTION
+// ==========================================
+function selectCategory(categoryId) {
+    gameState.currentCategory = categoryId;
+    const cat = CATEGORIES[categoryId];
 
-    // Apply theme colors
-    applyThemeColors(theme);
+    const root = document.documentElement;
+    root.style.setProperty('--accent-primary', cat.gradientFrom);
+    root.style.setProperty('--gradient-primary', `linear-gradient(135deg, ${cat.gradientFrom}, ${cat.gradientTo})`);
+    root.style.setProperty('--shadow-glow', `0 0 30px ${cat.gradientFrom}40`);
 
-    // Update hero text
-    document.getElementById('hero-badge').textContent = theme.badge;
-    document.getElementById('hero-theme-title').textContent = theme.heroTitle;
-    document.querySelector('.hero-subtitle').textContent = theme.subtitle;
-
-    // Update gallery
-    initHomeGallery();
+    showScreen('country');
 }
 
 // ==========================================
-// HOME GALLERY
+// COUNTRY CARDS
 // ==========================================
-function initHomeGallery() {
-    const gallery = document.getElementById('landscape-gallery');
-    gallery.innerHTML = '';
-    
-    // Animate out, then in
-    gallery.style.opacity = '0';
-    gallery.style.transform = 'translateY(10px)';
-    
-    setTimeout(() => {
-        getCurrentLandscapes().forEach(landscape => {
-            const item = document.createElement('div');
-            item.className = 'gallery-item';
-            item.innerHTML = `<img src="${landscape.image}" alt="${landscape.name}">`;
-            gallery.appendChild(item);
-        });
-        gallery.style.opacity = '1';
-        gallery.style.transform = 'translateY(0)';
-    }, 200);
+function renderCountryCards() {
+    const cat = CATEGORIES[gameState.currentCategory];
+    const countries = IMAGES[gameState.currentCategory];
+
+    document.getElementById('country-title').textContent = `${cat.icon} ${cat.name} — Elegí un País`;
+    document.getElementById('category-badge').textContent = cat.name;
+
+    const container = document.getElementById('country-cards');
+    container.innerHTML = '';
+
+    Object.entries(countries).forEach(([countryId, country], index) => {
+        const card = document.createElement('div');
+        card.className = 'country-card';
+        card.style.animationDelay = `${index * 0.1}s`;
+
+        card.innerHTML = `
+            <img src="${imgUrl(country.items[0].photo)}" alt="${country.name}" loading="lazy">
+            <div class="country-card-overlay">
+                <div class="country-card-flag">${country.flag}</div>
+                <div class="country-card-name">${country.name}</div>
+                <div class="country-card-count">${country.items.length} imagen${country.items.length !== 1 ? 'es' : ''}</div>
+            </div>
+        `;
+        card.addEventListener('click', () => selectCountry(countryId));
+        container.appendChild(card);
+    });
+}
+
+function selectCountry(countryId) {
+    gameState.currentCountry = countryId;
+    showScreen('select');
 }
 
 // ==========================================
 // EVENT LISTENERS
 // ==========================================
 function initEventListeners() {
-    // Navigation
-    document.getElementById('btn-start').addEventListener('click', () => showScreen('select'));
     document.getElementById('btn-back-home').addEventListener('click', () => showScreen('home'));
+    document.getElementById('btn-back-country').addEventListener('click', () => showScreen('country'));
     document.getElementById('btn-back-select').addEventListener('click', () => {
         stopTimer();
         showScreen('select');
     });
 
-    // Difficulty selection
     document.getElementById('difficulty-options').addEventListener('click', (e) => {
         const btn = e.target.closest('.diff-btn');
         if (!btn) return;
@@ -271,7 +306,6 @@ function initEventListeners() {
         gameState.gridSize = parseInt(btn.dataset.grid);
     });
 
-    // Game actions
     document.getElementById('btn-hint').addEventListener('mousedown', showHint);
     document.getElementById('btn-hint').addEventListener('mouseup', hideHint);
     document.getElementById('btn-hint').addEventListener('mouseleave', hideHint);
@@ -279,11 +313,8 @@ function initEventListeners() {
     document.getElementById('btn-hint').addEventListener('touchend', hideHint);
     document.getElementById('btn-shuffle').addEventListener('click', shufflePuzzle);
 
-    // Win screen
     document.getElementById('btn-download').addEventListener('click', downloadImage);
-    document.getElementById('btn-play-again').addEventListener('click', () => {
-        showScreen('select');
-    });
+    document.getElementById('btn-play-again').addEventListener('click', () => showScreen('select'));
     document.getElementById('btn-go-home').addEventListener('click', () => showScreen('home'));
 }
 
@@ -295,47 +326,41 @@ function showScreen(screenName) {
     screens[screenName].classList.add('active');
     gameState.currentScreen = screenName;
 
-    if (screenName === 'select') {
-        updateSelectScreenForTheme();
-        renderLandscapeCards();
-    }
-
-    if (screenName === 'home') {
-        updateHomeForTheme();
-    }
+    if (screenName === 'country') renderCountryCards();
+    if (screenName === 'select') renderSelectScreen();
 }
 
-function updateSelectScreenForTheme() {
-    const theme = getCurrentTheme();
-    
-    // Update mini badge
-    document.querySelector('.theme-badge-flag').textContent = theme.flag;
-    document.querySelector('.theme-badge-name').textContent = theme.name;
-    
-    // Update select title
-    document.getElementById('select-title').textContent = `Elegí tu Paisaje — ${theme.name}`;
+function renderSelectScreen() {
+    const country = IMAGES[gameState.currentCategory][gameState.currentCountry];
+
+    document.querySelector('.theme-badge-flag').textContent = country.flag;
+    document.querySelector('.theme-badge-name').textContent = country.name;
+    document.getElementById('select-title').textContent = `Elegí tu Imagen — ${country.name}`;
+
+    renderImageCards();
 }
 
 // ==========================================
-// LANDSCAPE CARDS
+// IMAGE CARDS (Select screen)
 // ==========================================
-function renderLandscapeCards() {
+function renderImageCards() {
+    const country = IMAGES[gameState.currentCategory][gameState.currentCountry];
     const container = document.getElementById('landscape-cards');
     container.innerHTML = '';
 
-    getCurrentLandscapes().forEach((landscape, index) => {
+    country.items.forEach((item, index) => {
         const card = document.createElement('div');
         card.className = 'landscape-card';
         card.style.animationDelay = `${index * 0.1}s`;
         card.innerHTML = `
-            <img src="${landscape.image}" alt="${landscape.name}" loading="lazy">
+            <img src="${imgUrl(item.photo)}" alt="${item.name}" loading="lazy">
             <div class="landscape-card-overlay">
-                <div class="landscape-card-name">${landscape.name}</div>
-                <div class="landscape-card-location">📍 ${landscape.location}</div>
+                <div class="landscape-card-name">${item.name}</div>
+                <div class="landscape-card-location">📍 ${item.location}</div>
             </div>
             <div class="landscape-card-play">🧩</div>
         `;
-        card.addEventListener('click', () => startGame(landscape));
+        card.addEventListener('click', () => startGame(item));
         container.appendChild(card);
     });
 }
@@ -343,72 +368,55 @@ function renderLandscapeCards() {
 // ==========================================
 // GAME LOGIC
 // ==========================================
-function startGame(landscape) {
-    gameState.selectedLandscape = landscape;
+function startGame(image) {
+    gameState.selectedImage = image;
     gameState.moves = 0;
     gameState.seconds = 0;
     gameState.isCompleted = false;
     gameState.selectedPiece = null;
 
-    // Update UI
-    document.querySelector('#game-landscape-name .info-text').textContent = landscape.name;
+    const url = imgUrl(image.photo);
+
+    document.querySelector('#game-landscape-name .info-text').textContent = image.name;
     updateMoves();
     updateTimer();
 
-    // Preview
-    document.getElementById('preview-image').src = landscape.image;
-    document.getElementById('hint-image').src = landscape.image;
+    document.getElementById('preview-image').src = url;
+    document.getElementById('hint-image').src = url;
 
-    // Build puzzle
     buildPuzzle();
-
-    // Show game screen
     showScreen('game');
-
-    // Start timer
     startTimer();
 }
 
 function buildPuzzle() {
     const board = document.getElementById('puzzle-board');
     const size = gameState.gridSize;
-    
+
     board.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     board.style.gridTemplateRows = `repeat(${size}, 1fr)`;
     board.innerHTML = '';
 
-    // Create pieces
     const totalPieces = size * size;
     gameState.pieces = [];
 
     for (let i = 0; i < totalPieces; i++) {
-        gameState.pieces.push({
-            id: i,
-            currentPos: i,
-            correctPos: i
-        });
+        gameState.pieces.push({ id: i, currentPos: i, correctPos: i });
     }
 
-    // Shuffle
     shuffleArray(gameState.pieces);
+    gameState.pieces.forEach((piece, index) => { piece.currentPos = index; });
 
-    // Update positions
-    gameState.pieces.forEach((piece, index) => {
-        piece.currentPos = index;
-    });
-
-    // Render
     renderPuzzle();
 }
 
 function renderPuzzle() {
     const board = document.getElementById('puzzle-board');
     const size = gameState.gridSize;
-    const landscape = gameState.selectedLandscape;
+    const url = imgUrl(gameState.selectedImage.photo);
 
     board.innerHTML = '';
 
-    // Sort by currentPos for rendering
     const sortedPieces = [...gameState.pieces].sort((a, b) => a.currentPos - b.currentPos);
 
     sortedPieces.forEach(piece => {
@@ -416,24 +424,19 @@ function renderPuzzle() {
         div.className = 'puzzle-piece';
         div.dataset.id = piece.id;
 
-        // Calculate background position
         const correctRow = Math.floor(piece.correctPos / size);
         const correctCol = piece.correctPos % size;
         const bgX = (correctCol / (size - 1)) * 100;
         const bgY = (correctRow / (size - 1)) * 100;
 
-        div.style.backgroundImage = `url('${landscape.image}')`;
+        div.style.backgroundImage = `url('${url}')`;
         div.style.backgroundSize = `${size * 100}%`;
         div.style.backgroundPosition = `${bgX}% ${bgY}%`;
 
-        // Check if correct
-        if (piece.currentPos === piece.correctPos) {
-            div.classList.add('correct');
-        }
+        if (piece.currentPos === piece.correctPos) div.classList.add('correct');
 
-        // Drag handlers (pointer events work for mouse + touch)
         div.addEventListener('pointerdown', (e) => onDragStart(e, piece, div));
-        div.style.touchAction = 'none'; // Prevent scroll on touch
+        div.style.touchAction = 'none';
 
         board.appendChild(div);
     });
@@ -442,7 +445,7 @@ function renderPuzzle() {
 }
 
 // ==========================================
-// DRAG & DROP SYSTEM
+// DRAG & DROP
 // ==========================================
 function onDragStart(e, piece, element) {
     if (gameState.isCompleted) return;
@@ -450,16 +453,12 @@ function onDragStart(e, piece, element) {
 
     const pieceRect = element.getBoundingClientRect();
 
-    // Store drag state
     gameState.isDragging = true;
     gameState.dragPiece = piece;
     gameState.dragElement = element;
-
-    // Calculate offset from pointer to piece top-left
     gameState.dragOffsetX = e.clientX - pieceRect.left;
     gameState.dragOffsetY = e.clientY - pieceRect.top;
 
-    // Create a visual clone to drag
     const clone = element.cloneNode(true);
     clone.className = 'puzzle-piece drag-clone';
     clone.style.width = pieceRect.width + 'px';
@@ -472,13 +471,9 @@ function onDragStart(e, piece, element) {
     document.body.appendChild(clone);
     gameState.dragClone = clone;
 
-    // Mark the original as being dragged
     element.classList.add('dragging-origin');
-
-    // Capture pointer for smooth dragging
     element.setPointerCapture(e.pointerId);
 
-    // Add move & end listeners
     const onMove = (ev) => onDragMove(ev);
     const onEnd = (ev) => {
         onDragEnd(ev);
@@ -494,53 +489,32 @@ function onDragStart(e, piece, element) {
 
 function onDragMove(e) {
     if (!gameState.isDragging || !gameState.dragClone) return;
-
-    const x = e.clientX - gameState.dragOffsetX;
-    const y = e.clientY - gameState.dragOffsetY;
-
-    gameState.dragClone.style.left = x + 'px';
-    gameState.dragClone.style.top = y + 'px';
-
-    // Highlight drop target
+    gameState.dragClone.style.left = (e.clientX - gameState.dragOffsetX) + 'px';
+    gameState.dragClone.style.top = (e.clientY - gameState.dragOffsetY) + 'px';
     highlightDropTarget(e.clientX, e.clientY);
 }
 
 function onDragEnd(e) {
     if (!gameState.isDragging) return;
 
-    // Find drop target
     const targetPiece = getDropTarget(e.clientX, e.clientY);
 
-    // Clean up clone
-    if (gameState.dragClone) {
-        gameState.dragClone.remove();
-        gameState.dragClone = null;
-    }
+    if (gameState.dragClone) { gameState.dragClone.remove(); gameState.dragClone = null; }
+    if (gameState.dragElement) gameState.dragElement.classList.remove('dragging-origin');
 
-    // Clean up origin style
-    if (gameState.dragElement) {
-        gameState.dragElement.classList.remove('dragging-origin');
-    }
-
-    // Clear all drop target highlights
     document.querySelectorAll('.puzzle-piece').forEach(p => p.classList.remove('drop-target'));
 
-    // Perform swap if valid target
     if (targetPiece && targetPiece.id !== gameState.dragPiece.id) {
         swapPieces(gameState.dragPiece, targetPiece);
     }
 
-    // Reset drag state
     gameState.isDragging = false;
     gameState.dragPiece = null;
     gameState.dragElement = null;
 }
 
 function highlightDropTarget(clientX, clientY) {
-    const board = document.getElementById('puzzle-board');
-    const pieces = board.querySelectorAll('.puzzle-piece');
-
-    pieces.forEach(p => {
+    document.getElementById('puzzle-board').querySelectorAll('.puzzle-piece').forEach(p => {
         p.classList.remove('drop-target');
         const rect = p.getBoundingClientRect();
         if (clientX >= rect.left && clientX <= rect.right &&
@@ -552,10 +526,7 @@ function highlightDropTarget(clientX, clientY) {
 }
 
 function getDropTarget(clientX, clientY) {
-    const board = document.getElementById('puzzle-board');
-    const pieces = board.querySelectorAll('.puzzle-piece');
-
-    for (const p of pieces) {
+    for (const p of document.getElementById('puzzle-board').querySelectorAll('.puzzle-piece')) {
         if (p === gameState.dragElement) continue;
         const rect = p.getBoundingClientRect();
         if (clientX >= rect.left && clientX <= rect.right &&
@@ -568,20 +539,15 @@ function getDropTarget(clientX, clientY) {
 }
 
 function swapPieces(piece1, piece2) {
-    // Swap positions
     const tempPos = piece1.currentPos;
     piece1.currentPos = piece2.currentPos;
     piece2.currentPos = tempPos;
 
     gameState.moves++;
     updateMoves();
-
     renderPuzzle();
 
-    // Check win
-    if (checkWin()) {
-        onWin();
-    }
+    if (checkWin()) onWin();
 }
 
 function checkWin() {
@@ -593,24 +559,16 @@ function onWin() {
     stopTimer();
 
     setTimeout(() => {
-        const landscape = gameState.selectedLandscape;
-        const diffLabel = DIFFICULTIES[gameState.gridSize].label;
+        const image = gameState.selectedImage;
 
-        // Update win screen
-        document.getElementById('win-image').src = landscape.image;
-        document.querySelector('.win-landscape-name').textContent = landscape.name;
-        document.querySelector('.win-landscape-location').textContent = `📍 ${landscape.location}`;
+        document.getElementById('win-image').src = imgUrl(image.photo);
+        document.querySelector('.win-landscape-name').textContent = image.name;
+        document.querySelector('.win-landscape-location').textContent = `📍 ${image.location}`;
         document.getElementById('stat-moves').textContent = gameState.moves;
         document.getElementById('stat-time').textContent = formatTime(gameState.seconds);
-        document.getElementById('stat-difficulty').textContent = diffLabel;
+        document.getElementById('stat-difficulty').textContent = DIFFICULTIES[gameState.gridSize].label;
 
-        // HD download only for Experto (6×6)
-        const btnDownload = document.getElementById('btn-download');
-        if (gameState.gridSize === 6) {
-            btnDownload.style.display = '';
-        } else {
-            btnDownload.style.display = 'none';
-        }
+        document.getElementById('btn-download').style.display = gameState.gridSize === 6 ? '' : 'none';
 
         showScreen('win');
         createConfetti();
@@ -625,11 +583,8 @@ function shuffleArray(arr) {
         const j = Math.floor(Math.random() * (i + 1));
         [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-    // Make sure it's not already solved
     const isSolved = arr.every((piece, idx) => piece.correctPos === idx);
-    if (isSolved && arr.length > 1) {
-        [arr[0], arr[1]] = [arr[1], arr[0]];
-    }
+    if (isSolved && arr.length > 1) [arr[0], arr[1]] = [arr[1], arr[0]];
 }
 
 function shufflePuzzle() {
@@ -641,9 +596,7 @@ function shufflePuzzle() {
     updateTimer();
 
     shuffleArray(gameState.pieces);
-    gameState.pieces.forEach((piece, index) => {
-        piece.currentPos = index;
-    });
+    gameState.pieces.forEach((piece, index) => { piece.currentPos = index; });
 
     renderPuzzle();
     startTimer();
@@ -663,17 +616,11 @@ function updateProgress() {
 // ==========================================
 function startTimer() {
     stopTimer();
-    gameState.timer = setInterval(() => {
-        gameState.seconds++;
-        updateTimer();
-    }, 1000);
+    gameState.timer = setInterval(() => { gameState.seconds++; updateTimer(); }, 1000);
 }
 
 function stopTimer() {
-    if (gameState.timer) {
-        clearInterval(gameState.timer);
-        gameState.timer = null;
-    }
+    if (gameState.timer) { clearInterval(gameState.timer); gameState.timer = null; }
 }
 
 function updateTimer() {
@@ -693,45 +640,38 @@ function updateMoves() {
 // ==========================================
 // HINT
 // ==========================================
-function showHint() {
-    document.getElementById('hint-overlay').classList.add('active');
-}
-
-function hideHint() {
-    document.getElementById('hint-overlay').classList.remove('active');
-}
+function showHint() { document.getElementById('hint-overlay').classList.add('active'); }
+function hideHint() { document.getElementById('hint-overlay').classList.remove('active'); }
 
 // ==========================================
-// DOWNLOAD
+// DOWNLOAD (Experto only)
 // ==========================================
 function downloadImage() {
     if (gameState.gridSize !== 6) return;
-    const landscape = gameState.selectedLandscape;
+    const image = gameState.selectedImage;
+    const url = `https://images.unsplash.com/photo-${image.photo}?w=2400&q=95&fit=crop&auto=format`;
+
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     const img = new Image();
-    
+
     img.crossOrigin = 'anonymous';
     img.onload = () => {
-        // HD resolution
         canvas.width = img.naturalWidth;
         canvas.height = img.naturalHeight;
         ctx.drawImage(img, 0, 0);
-
-        // Trigger download
         const link = document.createElement('a');
-        link.download = `${landscape.id}_HD.png`;
+        link.download = `${image.id}_HD.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
     };
     img.onerror = () => {
-        // Fallback: open image in new tab
         const link = document.createElement('a');
-        link.href = landscape.image;
-        link.download = `${landscape.id}_HD.png`;
+        link.href = url;
+        link.download = `${image.id}_HD.png`;
         link.click();
     };
-    img.src = landscape.image;
+    img.src = url;
 }
 
 // ==========================================
@@ -740,8 +680,7 @@ function downloadImage() {
 function createConfetti() {
     const container = document.getElementById('confetti');
     container.innerHTML = '';
-    const theme = getCurrentTheme();
-    const colors = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444', '#06b6d4', theme.gradientFrom, theme.gradientTo];
+    const colors = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444', '#06b6d4'];
 
     for (let i = 0; i < 80; i++) {
         const piece = document.createElement('div');
@@ -750,17 +689,11 @@ function createConfetti() {
         piece.style.background = colors[Math.floor(Math.random() * colors.length)];
         piece.style.animationDelay = Math.random() * 2 + 's';
         piece.style.animationDuration = (2 + Math.random() * 2) + 's';
-
-        const shapes = ['50%', '0%', '30%'];
-        piece.style.borderRadius = shapes[Math.floor(Math.random() * shapes.length)];
+        piece.style.borderRadius = ['50%', '0%', '30%'][Math.floor(Math.random() * 3)];
         piece.style.width = (6 + Math.random() * 10) + 'px';
         piece.style.height = (6 + Math.random() * 10) + 'px';
-
         container.appendChild(piece);
     }
 
-    // Clean up after animation
-    setTimeout(() => {
-        container.innerHTML = '';
-    }, 5000);
+    setTimeout(() => { container.innerHTML = ''; }, 5000);
 }

@@ -1109,6 +1109,46 @@ body {
         grid-template-columns: 1fr;
     }
 
+    .category-cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .category-card {
+        width: 100%;
+        max-width: 320px;
+        flex-direction: row;
+        padding: 1.25rem 1.5rem;
+        text-align: left;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .category-card-icon {
+        font-size: 2.2rem;
+        flex-shrink: 0;
+    }
+
+    .category-card-desc {
+        text-align: left;
+        max-width: none;
+    }
+
+    .category-card-arrow {
+        margin-left: auto;
+        margin-top: 0;
+    }
+
+    .country-cards {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .category-badge {
+        margin-left: 0;
+    }
+
     .game-header {
         flex-direction: column;
         align-items: flex-start;
@@ -1131,6 +1171,185 @@ body {
     .win-title {
         font-size: 2rem;
     }
+}
+
+/* ========================================
+   CATEGORY CARDS (Home)
+   ======================================== */
+
+.category-cards {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: slideUp 0.8s ease-out 0.3s both;
+}
+
+.category-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 2rem 2.5rem;
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: all var(--transition-smooth);
+    min-width: 180px;
+    position: relative;
+    overflow: hidden;
+    animation: slideUp 0.8s ease-out both;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--cat-from), var(--cat-to));
+    opacity: 0;
+    transition: opacity var(--transition-smooth);
+}
+
+.category-card:hover {
+    border-color: var(--cat-from, var(--accent-primary));
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 30px color-mix(in srgb, var(--cat-from) 30%, transparent);
+}
+
+.category-card:hover::before {
+    opacity: 0.12;
+}
+
+.category-card-icon {
+    font-size: 3rem;
+    position: relative;
+    z-index: 1;
+    transition: transform var(--transition-spring);
+}
+
+.category-card:hover .category-card-icon {
+    transform: scale(1.2);
+}
+
+.category-card-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    position: relative;
+    z-index: 1;
+}
+
+.category-card-desc {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-align: center;
+    max-width: 160px;
+    line-height: 1.4;
+    position: relative;
+    z-index: 1;
+}
+
+.category-card-arrow {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    position: relative;
+    z-index: 1;
+    transition: all var(--transition-fast);
+    margin-top: 0.25rem;
+}
+
+.category-card:hover .category-card-arrow {
+    color: var(--text-primary);
+    transform: translateX(4px);
+}
+
+/* ========================================
+   CATEGORY BADGE (Country Screen)
+   ======================================== */
+
+.category-badge {
+    padding: 0.45rem 1rem;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    margin-left: auto;
+}
+
+/* ========================================
+   COUNTRY CARDS
+   ======================================== */
+
+.country-cards {
+    width: 100%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.country-card {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-smooth);
+    aspect-ratio: 3/2;
+    animation: slideUp 0.5s ease-out both;
+}
+
+.country-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-glow), var(--shadow-card);
+}
+
+.country-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-smooth);
+}
+
+.country-card:hover img {
+    transform: scale(1.08);
+}
+
+.country-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 30%, rgba(0,0,0,0.85));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1.5rem;
+    text-align: center;
+    gap: 0.2rem;
+}
+
+.country-card-flag {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+}
+
+.country-card-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.country-card-count {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
 }
 
 /* ========================================

@@ -3,57 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Rompecabezas de paisajes de Sudamérica. Armá el puzzle y descargá la foto en HD. Argentina y Brasil.">
-    <title>🧩 Rompecabezas Sudamérica - Paisajes Increíbles</title>
+    <meta name="description" content="Rompecabezas de Sudamérica. Paisajes, animales y ciudades.">
+    <title>🧩 Rompecabezas Sudamérica</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Partículas de fondo -->
     <div class="particles" id="particles"></div>
 
-    <!-- Pantalla de inicio -->
+    <!-- Home Screen -->
     <div class="screen active" id="home-screen">
         <div class="hero">
-            <div class="hero-badge" id="hero-badge">🌎 SUDAMÉRICA</div>
+            <div class="hero-badge">🌎 SUDAMÉRICA</div>
             <h1 class="hero-title">
                 <span class="title-line">Rompecabezas</span>
-                <span class="title-line gradient-text" id="hero-theme-title">Paisajes de Sudamérica</span>
+                <span class="title-line gradient-text">Sudamérica</span>
             </h1>
-            <p class="hero-subtitle">Descubrí la belleza de Sudamérica armando increíbles rompecabezas fotográficos</p>
-            
-            <!-- Selector de temas -->
-            <div class="theme-selector" id="theme-selector">
-                <button class="theme-btn active" data-theme="argentina" id="theme-btn-argentina">
-                    <span class="theme-flag">🇦🇷</span>
-                    <span class="theme-name">Argentina</span>
-                    <span class="theme-count">5 paisajes</span>
-                </button>
-                <button class="theme-btn" data-theme="brasil" id="theme-btn-brasil">
-                    <span class="theme-flag">🇧🇷</span>
-                    <span class="theme-name">Brasil</span>
-                    <span class="theme-count">5 paisajes</span>
-                </button>
-            </div>
-
-            <div class="landscape-gallery" id="landscape-gallery">
-                <!-- Se llena con JS -->
-            </div>
-
-            <button class="btn btn-primary btn-glow" id="btn-start">
-                <span>🧩 Comenzar a Jugar</span>
-            </button>
+            <p class="hero-subtitle">Elegí una categoría y descubrí la belleza del continente</p>
+            <div class="category-cards" id="category-cards"></div>
         </div>
     </div>
 
-    <!-- Pantalla de selección -->
-    <div class="screen" id="select-screen">
+    <!-- Country Screen -->
+    <div class="screen" id="country-screen">
         <div class="screen-header">
             <button class="btn btn-back" id="btn-back-home">← Volver</button>
-            <h2 class="screen-title" id="select-title">Elegí tu Paisaje</h2>
+            <h2 class="screen-title" id="country-title">Elegí un País</h2>
+            <div class="category-badge" id="category-badge"></div>
+        </div>
+        <div class="country-cards" id="country-cards"></div>
+    </div>
+
+    <!-- Select Screen -->
+    <div class="screen" id="select-screen">
+        <div class="screen-header">
+            <button class="btn btn-back" id="btn-back-country">← Volver</button>
+            <h2 class="screen-title" id="select-title">Elegí tu Imagen</h2>
             <div class="theme-badge-mini" id="theme-badge-mini">
-                <span class="theme-badge-flag">🇦🇷</span>
-                <span class="theme-badge-name">Argentina</span>
+                <span class="theme-badge-flag"></span>
+                <span class="theme-badge-name"></span>
             </div>
         </div>
 
@@ -83,12 +71,10 @@
             </div>
         </div>
 
-        <div class="landscape-cards" id="landscape-cards">
-            <!-- Se llena con JS -->
-        </div>
+        <div class="landscape-cards" id="landscape-cards"></div>
     </div>
 
-    <!-- Pantalla de juego -->
+    <!-- Game Screen -->
     <div class="screen" id="game-screen">
         <div class="game-header">
             <button class="btn btn-back" id="btn-back-select">← Volver</button>
@@ -107,23 +93,15 @@
                 </div>
             </div>
             <div class="game-actions">
-                <button class="btn btn-small btn-hint" id="btn-hint" title="Ver imagen original">
-                    👁️ Pista
-                </button>
-                <button class="btn btn-small btn-shuffle" id="btn-shuffle" title="Mezclar de nuevo">
-                    🔀 Mezclar
-                </button>
+                <button class="btn btn-small" id="btn-hint" title="Ver imagen original">👁️ Pista</button>
+                <button class="btn btn-small" id="btn-shuffle" title="Mezclar de nuevo">🔀 Mezclar</button>
             </div>
         </div>
 
         <div class="game-area">
             <div class="puzzle-container" id="puzzle-container">
-                <div class="puzzle-board" id="puzzle-board">
-                    <!-- Piezas del puzzle -->
-                </div>
+                <div class="puzzle-board" id="puzzle-board"></div>
             </div>
-
-            <!-- Vista previa miniatura -->
             <div class="preview-panel" id="preview-panel">
                 <h4>Imagen de referencia</h4>
                 <div class="preview-image-wrapper">
@@ -136,23 +114,22 @@
             </div>
         </div>
 
-        <!-- Overlay de pista -->
         <div class="hint-overlay" id="hint-overlay">
             <img id="hint-image" src="" alt="Pista">
             <p>Soltá para volver al puzzle</p>
         </div>
     </div>
 
-    <!-- Pantalla de victoria -->
+    <!-- Win Screen -->
     <div class="screen" id="win-screen">
         <div class="win-content">
             <div class="confetti" id="confetti"></div>
             <h2 class="win-title">🎉 ¡Felicitaciones!</h2>
             <p class="win-subtitle">Armaste el rompecabezas exitosamente</p>
-            
+
             <div class="win-image-container">
                 <img id="win-image" src="" alt="Imagen completada">
-                <div class="win-image-info" id="win-image-info">
+                <div class="win-image-info">
                     <span class="win-landscape-name"></span>
                     <span class="win-landscape-location"></span>
                 </div>
@@ -174,15 +151,9 @@
             </div>
 
             <div class="win-actions">
-                <button class="btn btn-primary btn-glow" id="btn-download">
-                    📥 Descargar en HD
-                </button>
-                <button class="btn btn-secondary" id="btn-play-again">
-                    🔄 Jugar de nuevo
-                </button>
-                <button class="btn btn-secondary" id="btn-go-home">
-                    🏠 Menú principal
-                </button>
+                <button class="btn btn-primary btn-glow" id="btn-download">📥 Descargar en HD</button>
+                <button class="btn btn-secondary" id="btn-play-again">🔄 Jugar de nuevo</button>
+                <button class="btn btn-secondary" id="btn-go-home">🏠 Menú principal</button>
             </div>
         </div>
     </div>
