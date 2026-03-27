@@ -5,10 +5,33 @@
 // ==========================================
 // CONFIG
 // ==========================================
-const UNSPLASH_PARAMS = '?w=900&q=85&fit=crop&crop=entropy&auto=format';
+const UNSPLASH_ACCESS_KEY = 'Jxev90HPjzslJ7p06qmOmEILjjHYmKZaWDPWYJQVNBQ';
+const UNSPLASH_CACHE_KEY = 'puzzle_unsplash_cache';
+const UNSPLASH_PARAMS = '&w=900&q=85&fit=crop&crop=entropy&auto=format';
 
-function imgUrl(photoId) {
-    return `https://images.unsplash.com/photo-${photoId}${UNSPLASH_PARAMS}`;
+// Cache in memory + localStorage
+const photoCache = JSON.parse(localStorage.getItem(UNSPLASH_CACHE_KEY) || '{}');
+
+function saveCache() {
+    localStorage.setItem(UNSPLASH_CACHE_KEY, JSON.stringify(photoCache));
+}
+
+async function imgUrl(slug) {
+    if (photoCache[slug]) return photoCache[slug];
+
+    try {
+        const res = await fetch(
+            `https://api.unsplash.com/photos/${slug}?client_id=${UNSPLASH_ACCESS_KEY}`
+        );
+        if (!res.ok) throw new Error('fetch failed');
+        const data = await res.json();
+        const url = data.urls.regular + UNSPLASH_PARAMS;
+        photoCache[slug] = url;
+        saveCache();
+        return url;
+    } catch {
+        return `https://via.placeholder.com/900x600/1a2035/94a3b8?text=${encodeURIComponent(slug)}`;
+    }
 }
 
 // ==========================================
@@ -254,7 +277,7 @@ function selectCategory(categoryId) {
 // ==========================================
 // COUNTRY CARDS
 // ==========================================
-function renderCountryCards() {
+async function renderCountryCards() {
     const cat = CATEGORIES[gameState.currentCategory];
     const countries = IMAGES[gameState.currentCategory];
 
@@ -269,16 +292,24 @@ function renderCountryCards() {
         card.className = 'country-card';
         card.style.animationDelay = `${index * 0.1}s`;
 
-        card.innerHTML = `
-            <img src="${imgUrl(country.items[0].photo)}" alt="${country.name}" loading="lazy">
-            <div class="country-card-overlay">
-                <div class="country-card-flag">${country.flag}</div>
-                <div class="country-card-name">${country.name}</div>
-                <div class="country-card-count">${country.items.length} imagen${country.items.length !== 1 ? 'es' : ''}</div>
-            </div>
+        const img = document.createElement('img');
+        img.alt = country.name;
+        img.loading = 'lazy';
+
+        const overlay = document.createElement('div');
+        overlay.className = 'country-card-overlay';
+        overlay.innerHTML = `
+            <div class="country-card-flag">${country.flag}</div>
+            <div class="country-card-name">${country.name}</div>
+            <div class="country-card-count">${country.items.length} imagen${country.items.length !== 1 ? 'es' : ''}</div>
         `;
+
+        card.appendChild(img);
+        card.appendChild(overlay);
         card.addEventListener('click', () => selectCountry(countryId));
         container.appendChild(card);
+
+        imgUrl(country.items[0].photo).then(url => { img.src = url; });
     });
 }
 
@@ -352,37 +383,45 @@ function renderImageCards() {
         const card = document.createElement('div');
         card.className = 'landscape-card';
         card.style.animationDelay = `${index * 0.1}s`;
-        card.innerHTML = `
-            <img src="${imgUrl(item.photo)}" alt="${item.name}" loading="lazy">
+
+        const img = document.createElement('img');
+        img.alt = item.name;
+        img.loading = 'lazy';
+
+        card.appendChild(img);
+        card.insertAdjacentHTML('beforeend', `
             <div class="landscape-card-overlay">
                 <div class="landscape-card-name">${item.name}</div>
                 <div class="landscape-card-location">📍 ${item.location}</div>
             </div>
             <div class="landscape-card-play">🧩</div>
-        `;
+        `);
         card.addEventListener('click', () => startGame(item));
         container.appendChild(card);
+
+        imgUrl(item.photo).then(url => { img.src = url; });
     });
 }
 
 // ==========================================
 // GAME LOGIC
 // ==========================================
-function startGame(image) {
+async function startGame(image) {
     gameState.selectedImage = image;
     gameState.moves = 0;
     gameState.seconds = 0;
     gameState.isCompleted = false;
     gameState.selectedPiece = null;
 
-    const url = imgUrl(image.photo);
+    // Resolve URL before building puzzle
+    gameState.currentImageUrl = await imgUrl(image.photo);
 
     document.querySelector('#game-landscape-name .info-text').textContent = image.name;
     updateMoves();
     updateTimer();
 
-    document.getElementById('preview-image').src = url;
-    document.getElementById('hint-image').src = url;
+    document.getElementById('preview-image').src = gameState.currentImageUrl;
+    document.getElementById('hint-image').src = gameState.currentImageUrl;
 
     buildPuzzle();
     showScreen('game');
@@ -413,7 +452,7 @@ function buildPuzzle() {
 function renderPuzzle() {
     const board = document.getElementById('puzzle-board');
     const size = gameState.gridSize;
-    const url = imgUrl(gameState.selectedImage.photo);
+    const url = gameState.currentImageUrl;
 
     board.innerHTML = '';
 
@@ -561,7 +600,7 @@ function onWin() {
     setTimeout(() => {
         const image = gameState.selectedImage;
 
-        document.getElementById('win-image').src = imgUrl(image.photo);
+        document.getElementById('win-image').src = gameState.currentImageUrl;
         document.querySelector('.win-landscape-name').textContent = image.name;
         document.querySelector('.win-landscape-location').textContent = `📍 ${image.location}`;
         document.getElementById('stat-moves').textContent = gameState.moves;
@@ -649,7 +688,7 @@ function hideHint() { document.getElementById('hint-overlay').classList.remove('
 function downloadImage() {
     if (gameState.gridSize !== 6) return;
     const image = gameState.selectedImage;
-    const url = `https://images.unsplash.com/photo-${image.photo}?w=2400&q=95&fit=crop&auto=format`;
+    const url = gameState.currentImageUrl.split('?')[0] + '?w=2400&q=95&fit=crop&auto=format';
 
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
