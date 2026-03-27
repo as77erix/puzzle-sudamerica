@@ -99,6 +99,7 @@ const IMAGES = {
             items: [
                 { id: 'polonio', name: 'Cabo Polonio', location: 'Rocha', photo: 'FAqQVlNeSUg' },
                 { id: 'punta', name: 'Punta del Este', location: 'Maldonado', photo: 'jHz2WyDBVyo' },
+                { id: 'colonia_sunset', name: 'Colonia del Sacramento', location: 'Colonia', photo: 'wwBk0aCa7Gs' },
             ]
         },
         colombia: {
@@ -107,6 +108,7 @@ const IMAGES = {
                 { id: 'cocora', name: 'Valle del Cocora', location: 'Quindío', photo: 'akkbyynQtEg' },
                 { id: 'tayrona', name: 'Parque Tayrona', location: 'Magdalena', photo: 'gc5OYAll-rc' },
                 { id: 'cartagena_walls', name: 'Ciudad Amurallada', location: 'Cartagena', photo: 'PM95XBE1Xxk' },
+                { id: 'cano_cristales', name: 'Caño Cristales', location: 'Meta', photo: '5hcxlXRW_KM' },
             ]
         },
         peru: {
@@ -115,8 +117,39 @@ const IMAGES = {
                 { id: 'machu_picchu', name: 'Machu Picchu', location: 'Cusco', photo: 'gQzlCU9_ItA' },
                 { id: 'rainbow', name: 'Montaña de Colores', location: 'Cusco', photo: 'kTbZ0n9MzqI' },
                 { id: 'huacachina', name: 'Huacachina', location: 'Ica', photo: 'Q-bULd2CYds' },
+                { id: 'titicaca', name: 'Lago Titicaca', location: 'Puno', photo: 'xq0MW-DM6Cc' },
             ]
-        }
+        },
+        bolivia: {
+            flag: '🇧🇴', name: 'Bolivia',
+            items: [
+                { id: 'uyuni', name: 'Salar de Uyuni', location: 'Potosí', photo: '1k-hqjlmBRE' },
+                { id: 'laguna_colorada', name: 'Laguna Colorada', location: 'Potosí', photo: 'Ni0fXNmEPJ4' },
+                { id: 'valle_luna_bo', name: 'Valle de la Luna', location: 'La Paz', photo: '0dqqcem_lWI' },
+            ]
+        },
+        ecuador: {
+            flag: '🇪🇨', name: 'Ecuador',
+            items: [
+                { id: 'galapagos', name: 'Islas Galápagos', location: 'Galápagos', photo: 'LJIjXgutX4g' },
+                { id: 'cotopaxi', name: 'Volcán Cotopaxi', location: 'Cotopaxi', photo: 'GvLG8Q-KQ6A' },
+                { id: 'amazon_ec', name: 'Selva Amazónica', location: 'Orellana', photo: 'zzzS45Cjhdw' },
+            ]
+        },
+        venezuela: {
+            flag: '🇻🇪', name: 'Venezuela',
+            items: [
+                { id: 'angel_falls', name: 'Salto Ángel', location: 'Bolívar', photo: 'TwojIl0NzMY' },
+                { id: 'roraima', name: 'Tepuy Roraima', location: 'Gran Sabana', photo: 'lxmavRZKFJ4' },
+            ]
+        },
+        paraguay: {
+            flag: '🇵🇾', name: 'Paraguay',
+            items: [
+                { id: 'iguazu_py', name: 'Cataratas del Iguazú', location: 'Alto Paraná', photo: '6l2S5R4TUnc' },
+                { id: 'trinidad', name: 'Ruinas de Trinidad', location: 'Itapúa', photo: 'zsdDAztLRiE' },
+            ]
+        },
     },
     animales: {
         sudamerica: {
@@ -129,6 +162,10 @@ const IMAGES = {
                 { id: 'capibara', name: 'Capibara', location: 'Humedales', photo: 'kl617diIESw' },
                 { id: 'pinguino', name: 'Pingüino de Magallanes', location: 'Tierra del Fuego', photo: 'zBVhMwd7g_A' },
                 { id: 'llama', name: 'Llama', location: 'Andes', photo: 'OQykYSpB5qQ' },
+                { id: 'flamingo', name: 'Flamenco Andino', location: 'Salar de Bolivia', photo: 't0_p8hlJiZw' },
+                { id: 'guacamayo', name: 'Guacamayo', location: 'Amazonia', photo: 'nzBMNJvWZAE' },
+                { id: 'oso_hormiguero', name: 'Oso Hormiguero', location: 'Pantanal, Brasil', photo: 'FmukIbiGMrk' },
+                { id: 'anaconda', name: 'Anaconda', location: 'Amazonia', photo: 'BJZK8bc2mhE' },
             ]
         }
     },
@@ -145,18 +182,24 @@ const IMAGES = {
             flag: '🇧🇷', name: 'Brasil',
             items: [
                 { id: 'pelourinho', name: 'Pelourinho', location: 'Salvador, Bahía', photo: 'BGD47PMGzyM' },
+                { id: 'rio_sugarloaf', name: 'Pan de Azúcar', location: 'Río de Janeiro', photo: 'P40XjykprjM' },
+                { id: 'sao_paulo', name: 'São Paulo', location: 'São Paulo', photo: '6OMe9rp3v9c' },
             ]
         },
         chile: {
             flag: '🇨🇱', name: 'Chile',
             items: [
                 { id: 'santiago', name: 'Santiago', location: 'Región Metropolitana', photo: 'QH3rBhcJS54' },
+                { id: 'valparaiso', name: 'Valparaíso', location: 'Valparaíso', photo: 'H6KJ2D0LphU' },
+                { id: 'valparaiso2', name: 'Valparaíso Cerros', location: 'Valparaíso', photo: 'qGcIfPdQSb4' },
             ]
         },
         colombia: {
             flag: '🇨🇴', name: 'Colombia',
             items: [
                 { id: 'bogota', name: 'Bogotá', location: 'Cundinamarca', photo: 'gdcT7prXMzE' },
+                { id: 'cartagena_street', name: 'Cartagena Colorida', location: 'Cartagena de Indias', photo: 'JINIW3yzobc' },
+                { id: 'guatape', name: 'Guatapé', location: 'Antioquia', photo: 'Q8HGO9en0sY' },
             ]
         },
         peru: {
@@ -165,7 +208,35 @@ const IMAGES = {
                 { id: 'cusco', name: 'Cusco', location: 'Plaza de Armas', photo: '2LydtNCRBv8' },
                 { id: 'lima', name: 'Lima Miraflores', location: 'Lima', photo: 'JvxnQV_gaO8' },
             ]
-        }
+        },
+        uruguay: {
+            flag: '🇺🇾', name: 'Uruguay',
+            items: [
+                { id: 'colonia_colonial', name: 'Colonia del Sacramento', location: 'Colonia', photo: 'PWjA3zA497I' },
+                { id: 'punta_buildings', name: 'Punta del Este', location: 'Maldonado', photo: 'ehFgttlFJNA' },
+                { id: 'punta_skyline', name: 'Punta del Este Skyline', location: 'Maldonado', photo: 'gnwPEQZR9pk' },
+            ]
+        },
+        bolivia: {
+            flag: '🇧🇴', name: 'Bolivia',
+            items: [
+                { id: 'la_paz', name: 'La Paz', location: 'La Paz', photo: 'T_oeAGfY3MI' },
+                { id: 'sucre', name: 'Sucre', location: 'Chuquisaca', photo: 'P3kH_hH-4z4' },
+            ]
+        },
+        ecuador: {
+            flag: '🇪🇨', name: 'Ecuador',
+            items: [
+                { id: 'quito', name: 'Quito', location: 'Pichincha', photo: 'IUwpdJVM4Fc' },
+                { id: 'cuenca', name: 'Cuenca', location: 'Azuay', photo: 'rI0arLMf4do' },
+            ]
+        },
+        venezuela: {
+            flag: '🇻🇪', name: 'Venezuela',
+            items: [
+                { id: 'caracas', name: 'Caracas', location: 'Distrito Capital', photo: '8Pm2WioMBBQ' },
+            ]
+        },
     }
 };
 
