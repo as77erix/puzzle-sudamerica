@@ -123,9 +123,9 @@ const IMAGES = {
             items: [
                 { id: 'jaguar', name: 'Jaguar', location: 'Pantanal, Brasil', photo: 'xpBGzErZeZs' },
                 { id: 'tucan', name: 'Tucán', location: 'Selva tropical', photo: 'aIc0mwL-Tt0' },
-                { id: 'tapir', name: 'Tapir', location: 'Amazonia', photo: 'aOVVKWDlfaE' },
+                { id: 'tapir', name: 'Tapir', location: 'Amazonia', photo: '1m8mdst8JTE' },
                 { id: 'condor', name: 'Cóndor Andino', location: 'Andes', photo: 'fGvDhUKTdUc' },
-                { id: 'capibara', name: 'Capibara', location: 'Humedales', photo: 'MoO5tsZHfiQ' },
+                { id: 'capibara', name: 'Capibara', location: 'Humedales', photo: 'kl617diIESw' },
                 { id: 'pinguino', name: 'Pingüino de Magallanes', location: 'Tierra del Fuego', photo: 'zBVhMwd7g_A' },
                 { id: 'llama', name: 'Llama', location: 'Andes', photo: 'OQykYSpB5qQ' },
             ]
