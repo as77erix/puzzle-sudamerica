@@ -17,6 +17,7 @@ function saveCache() {
 }
 
 async function imgUrl(slug) {
+    if (slug.startsWith('http')) return slug;
     if (photoCache[slug]) return photoCache[slug];
 
     try {
@@ -146,7 +147,7 @@ const IMAGES = {
         paraguay: {
             flag: '🇵🇾', name: 'Paraguay',
             items: [
-                { id: 'iguazu_py', name: 'Cataratas del Iguazú', location: 'Alto Paraná', photo: '6l2S5R4TUnc' },
+                { id: 'ypacarai', name: 'Lago Ypacaraí', location: 'Cordillera', photo: 'https://upload.wikimedia.org/wikipedia/commons/8/81/Lago_Ypacarai_-_panoramio.jpg' },
                 { id: 'trinidad', name: 'Ruinas de Trinidad', location: 'Itapúa', photo: 'zsdDAztLRiE' },
             ]
         },
