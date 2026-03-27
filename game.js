@@ -121,13 +121,13 @@ const IMAGES = {
         sudamerica: {
             flag: '🌎', name: 'Sudamérica',
             items: [
-                { id: 'jaguar', name: 'Jaguar', location: 'Amazonía', photo: 'eRWokxnP4t0' },
-                { id: 'tucan', name: 'Tucán', location: 'Selva tropical', photo: 'yBhhxfMMMyU' },
-                { id: 'tapir', name: 'Tapir', location: 'Amazonia', photo: '1m8mdst8JTE' },
+                { id: 'jaguar', name: 'Jaguar', location: 'Pantanal, Brasil', photo: 'xpBGzErZeZs' },
+                { id: 'tucan', name: 'Tucán', location: 'Selva tropical', photo: 'aIc0mwL-Tt0' },
+                { id: 'tapir', name: 'Tapir', location: 'Amazonia', photo: 'aOVVKWDlfaE' },
                 { id: 'condor', name: 'Cóndor Andino', location: 'Andes', photo: 'fGvDhUKTdUc' },
-                { id: 'capibara', name: 'Capibara', location: 'Humedales', photo: 'bt09Cs3UthM' },
-                { id: 'pinguino', name: 'Pingüino de Magallanes', location: 'Patagonia', photo: 'h2acydK6n8A' },
-                { id: 'llama', name: 'Llama', location: 'Andes', photo: 'BtoWJ8jdWEo' },
+                { id: 'capibara', name: 'Capibara', location: 'Humedales', photo: 'MoO5tsZHfiQ' },
+                { id: 'pinguino', name: 'Pingüino de Magallanes', location: 'Tierra del Fuego', photo: 'zBVhMwd7g_A' },
+                { id: 'llama', name: 'Llama', location: 'Andes', photo: 'OQykYSpB5qQ' },
             ]
         }
     },
