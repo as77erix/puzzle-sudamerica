@@ -17,7 +17,9 @@ function saveCache() {
 }
 
 async function imgUrl(slug) {
-    if (slug.startsWith('http')) return slug;
+    if (slug.startsWith('http')) {
+        return `https://wsrv.nl/?url=${encodeURIComponent(slug)}&w=800&h=800&fit=cover&a=attention&output=jpg`;
+    }
     if (photoCache[slug]) return photoCache[slug];
 
     try {
