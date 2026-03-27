@@ -158,7 +158,7 @@ const IMAGES = {
         sudamerica: {
             flag: '🌎', name: 'Sudamérica',
             items: [
-                { id: 'jaguar', name: 'Jaguar', location: 'Pantanal, Brasil', photo: 'xpBGzErZeZs' },
+                { id: 'jaguar', name: 'Jaguar', location: 'Pantanal, Brasil', photo: 'cC2I3_XvFDs' },
                 { id: 'tucan', name: 'Tucán', location: 'Selva tropical', photo: 'aIc0mwL-Tt0' },
                 { id: 'tapir', name: 'Tapir', location: 'Amazonia', photo: '1m8mdst8JTE' },
                 { id: 'condor', name: 'Cóndor Andino', location: 'Andes', photo: 'fGvDhUKTdUc' },
@@ -169,6 +169,11 @@ const IMAGES = {
                 { id: 'guacamayo', name: 'Guacamayo', location: 'Amazonia', photo: 'nzBMNJvWZAE' },
                 { id: 'oso_hormiguero', name: 'Oso Hormiguero', location: 'Pantanal, Brasil', photo: 'FmukIbiGMrk' },
                 { id: 'anaconda', name: 'Anaconda', location: 'Amazonia', photo: 'BJZK8bc2mhE' },
+                { id: 'rana_dardo', name: 'Rana Dardo', location: 'Amazonia', photo: '98dUMCI_KI8' },
+                { id: 'piranha', name: 'Piraña', location: 'Pantanal, Brasil', photo: 'sIzlhggRAqg' },
+                { id: 'caiman', name: 'Caimán Negro', location: 'Amazonia', photo: 'euquelL3lkw' },
+                { id: 'lobo_marino', name: 'Lobo Marino', location: 'Galápagos, Ecuador', photo: '1HaoVXAbsv4' },
+                { id: 'mono', name: 'Mono Araña', location: 'Amazonia', photo: 'R8w5il3avv8' },
             ]
         }
     },
