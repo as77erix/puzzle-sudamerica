@@ -6,8 +6,8 @@
 // CONFIG
 // ==========================================
 const UNSPLASH_ACCESS_KEY = 'Jxev90HPjzslJ7p06qmOmEILjjHYmKZaWDPWYJQVNBQ';
-const UNSPLASH_CACHE_KEY = 'puzzle_unsplash_cache';
-const UNSPLASH_PARAMS = '&w=900&q=85&fit=crop&crop=entropy&auto=format';
+const UNSPLASH_CACHE_KEY = 'puzzle_unsplash_cache_v2';
+const UNSPLASH_PARAMS = '&w=900&h=600&q=85&fit=crop&crop=attention&auto=format';
 
 // Cache in memory + localStorage
 const photoCache = JSON.parse(localStorage.getItem(UNSPLASH_CACHE_KEY) || '{}');
