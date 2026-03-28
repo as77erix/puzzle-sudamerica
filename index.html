@@ -11,6 +11,17 @@
 <body>
     <div class="particles" id="particles"></div>
 
+    <!-- Name Modal -->
+    <div class="name-modal" id="name-modal">
+        <div class="name-modal-content">
+            <div class="name-modal-icon">🧩</div>
+            <h2>¡Bienvenido!</h2>
+            <p>¿Cómo te llamás?</p>
+            <input type="text" id="player-name-input" placeholder="Tu nombre o nick" maxlength="20" autocomplete="off">
+            <button class="btn btn-primary btn-glow" id="btn-save-name">¡Jugar!</button>
+        </div>
+    </div>
+
     <!-- Home Screen -->
     <div class="screen active" id="home-screen">
         <div class="hero">
@@ -95,6 +106,7 @@
             <div class="game-actions">
                 <button class="btn btn-small" id="btn-hint" title="Ver imagen original">👁️ Pista</button>
                 <button class="btn btn-small" id="btn-shuffle" title="Mezclar de nuevo">🔀 Mezclar</button>
+                <button class="btn btn-small" id="btn-mute" title="Sonido">🔊</button>
             </div>
         </div>
 
@@ -117,6 +129,18 @@
         <div class="hint-overlay" id="hint-overlay">
             <img id="hint-image" src="" alt="Pista">
             <p>Soltá para volver al puzzle</p>
+        </div>
+
+        <div class="out-of-moves-overlay" id="out-of-moves-overlay">
+            <div class="out-of-moves-content">
+                <div class="out-of-moves-icon">😔</div>
+                <h3>¡Sin movimientos!</h3>
+                <p>No te quedan movimientos para completar este rompecabezas.</p>
+                <div class="out-of-moves-actions">
+                    <button class="btn btn-primary btn-glow" id="btn-retry">🔄 Intentar de nuevo</button>
+                    <button class="btn btn-secondary" id="btn-give-up">🏠 Menú principal</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -151,6 +175,7 @@
             </div>
 
             <div class="win-actions">
+                <button class="btn btn-primary btn-glow" id="btn-next-puzzle">➡️ Siguiente puzzle</button>
                 <button class="btn btn-primary btn-glow" id="btn-download">📥 Descargar en HD</button>
                 <button class="btn btn-secondary" id="btn-play-again">🔄 Jugar de nuevo</button>
                 <button class="btn btn-secondary" id="btn-go-home">🏠 Menú principal</button>

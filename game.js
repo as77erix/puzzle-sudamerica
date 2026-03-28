@@ -255,6 +255,99 @@ const DIFFICULTIES = {
     6: { label: 'Experto', icon: '🔴' }
 };
 
+// Move limits per difficulty (future: draw from global regen pool)
+const MOVE_LIMITS = { 3: 35, 4: 70, 5: 130, 6: 220 };
+
+// ==========================================
+// PLAYER
+// ==========================================
+let playerName = localStorage.getItem('puzzle_player_name') || '';
+
+// ==========================================
+// SOUND SYSTEM (Web Audio API — 0 KB files)
+// ==========================================
+let audioCtx = null;
+let ambientNodes = [];
+let soundEnabled = localStorage.getItem('puzzle_sound') !== '0';
+
+function getAudioCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+}
+
+function playTone(freq, type, volume, duration, delay = 0) {
+    if (!soundEnabled) return;
+    try {
+        const ctx = getAudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = type;
+        osc.frequency.value = freq;
+        const t = ctx.currentTime + delay;
+        gain.gain.setValueAtTime(volume, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + duration);
+        osc.start(t);
+        osc.stop(t + duration);
+    } catch(e) {}
+}
+
+function playClick() {
+    playTone(700, 'sine', 0.07, 0.07);
+}
+
+function playCorrect() {
+    [523, 659, 784].forEach((f, i) => playTone(f, 'sine', 0.12, 0.25, i * 0.08));
+}
+
+function playWin() {
+    [523, 659, 784, 659, 1047].forEach((f, i) => playTone(f, 'sine', 0.18, 0.35, i * 0.13));
+}
+
+function playOutOfMoves() {
+    [300, 240, 180].forEach((f, i) => playTone(f, 'sawtooth', 0.09, 0.3, i * 0.15));
+}
+
+function startAmbient() {
+    if (!soundEnabled || ambientNodes.length > 0) return;
+    try {
+        const ctx = getAudioCtx();
+        const master = ctx.createGain();
+        master.gain.value = 0.035;
+        master.connect(ctx.destination);
+        [130.81, 196.00, 261.63].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const lfo = ctx.createOscillator();
+            const lfoGain = ctx.createGain();
+            lfo.frequency.value = 0.12 + idx * 0.05;
+            lfoGain.gain.value = freq * 0.004;
+            lfo.connect(lfoGain);
+            lfoGain.connect(osc.frequency);
+            osc.type = 'sine';
+            osc.frequency.value = freq;
+            osc.connect(master);
+            lfo.start();
+            osc.start();
+            ambientNodes.push(osc, lfo);
+        });
+        ambientNodes.push(master);
+    } catch(e) {}
+}
+
+function stopAmbient() {
+    ambientNodes.forEach(n => { try { n.stop(); } catch(e) {} try { n.disconnect(); } catch(e) {} });
+    ambientNodes = [];
+}
+
+function toggleSound() {
+    soundEnabled = !soundEnabled;
+    localStorage.setItem('puzzle_sound', soundEnabled ? '1' : '0');
+    document.getElementById('btn-mute').textContent = soundEnabled ? '🔊' : '🔇';
+    if (soundEnabled) startAmbient(); else stopAmbient();
+}
+
 // ==========================================
 // GAME STATE
 // ==========================================
@@ -262,11 +355,14 @@ let gameState = {
     currentScreen: 'home',
     currentCategory: null,
     currentCountry: null,
+    currentImageIndex: 0,
     selectedImage: null,
     gridSize: 3,
     pieces: [],
     selectedPiece: null,
     moves: 0,
+    movesRemaining: 0,
+    moveLimit: 0,
     timer: null,
     seconds: 0,
     isCompleted: false,
@@ -296,6 +392,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initParticles();
     renderCategoryCards();
     initEventListeners();
+    if (!playerName) showNameModal();
+    document.getElementById('btn-mute').textContent = soundEnabled ? '🔊' : '🔇';
 });
 
 // ==========================================
@@ -401,11 +499,31 @@ function selectCountry(countryId) {
 // ==========================================
 // EVENT LISTENERS
 // ==========================================
+function showNameModal() {
+    document.getElementById('name-modal').classList.add('active');
+    document.getElementById('player-name-input').focus();
+}
+
+function savePlayerName() {
+    const input = document.getElementById('player-name-input').value.trim();
+    if (!input) return;
+    playerName = input;
+    localStorage.setItem('puzzle_player_name', playerName);
+    document.getElementById('name-modal').classList.remove('active');
+}
+
 function initEventListeners() {
-    document.getElementById('btn-back-home').addEventListener('click', () => showScreen('home'));
+    // Name modal
+    document.getElementById('btn-save-name').addEventListener('click', savePlayerName);
+    document.getElementById('player-name-input').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') savePlayerName();
+    });
+
+    // Navigation
+    document.getElementById('btn-back-home').addEventListener('click', () => { stopAmbient(); showScreen('home'); });
     document.getElementById('btn-back-country').addEventListener('click', () => showScreen('country'));
     document.getElementById('btn-back-select').addEventListener('click', () => {
-        stopTimer();
+        stopTimer(); stopAmbient();
         showScreen('select');
     });
 
@@ -417,14 +535,33 @@ function initEventListeners() {
         gameState.gridSize = parseInt(btn.dataset.grid);
     });
 
+    // Game controls
     document.getElementById('btn-hint').addEventListener('mousedown', showHint);
     document.getElementById('btn-hint').addEventListener('mouseup', hideHint);
     document.getElementById('btn-hint').addEventListener('mouseleave', hideHint);
     document.getElementById('btn-hint').addEventListener('touchstart', (e) => { e.preventDefault(); showHint(); });
     document.getElementById('btn-hint').addEventListener('touchend', hideHint);
     document.getElementById('btn-shuffle').addEventListener('click', shufflePuzzle);
+    document.getElementById('btn-mute').addEventListener('click', toggleSound);
 
+    // Out of moves
+    document.getElementById('btn-retry').addEventListener('click', () => {
+        document.getElementById('out-of-moves-overlay').classList.remove('active');
+        startGame(gameState.selectedImage);
+    });
+    document.getElementById('btn-give-up').addEventListener('click', () => {
+        document.getElementById('out-of-moves-overlay').classList.remove('active');
+        stopTimer(); stopAmbient();
+        showScreen('home');
+    });
+
+    // Win screen
     document.getElementById('btn-download').addEventListener('click', downloadImage);
+    document.getElementById('btn-next-puzzle').addEventListener('click', () => {
+        const items = IMAGES[gameState.currentCategory][gameState.currentCountry].items;
+        const nextImage = items[gameState.currentImageIndex + 1];
+        if (nextImage) startGame(nextImage);
+    });
     document.getElementById('btn-play-again').addEventListener('click', () => showScreen('select'));
     document.getElementById('btn-go-home').addEventListener('click', () => showScreen('home'));
 }
@@ -489,9 +626,14 @@ function renderImageCards() {
 async function startGame(image) {
     gameState.selectedImage = image;
     gameState.moves = 0;
+    gameState.movesRemaining = MOVE_LIMITS[gameState.gridSize];
+    gameState.moveLimit = MOVE_LIMITS[gameState.gridSize];
     gameState.seconds = 0;
     gameState.isCompleted = false;
     gameState.selectedPiece = null;
+
+    const items = IMAGES[gameState.currentCategory][gameState.currentCountry].items;
+    gameState.currentImageIndex = items.findIndex(img => img.id === image.id);
 
     // Resolve URL before building puzzle
     gameState.currentImageUrl = await imgUrl(image.photo);
@@ -506,6 +648,7 @@ async function startGame(image) {
     buildPuzzle();
     showScreen('game');
     startTimer();
+    startAmbient();
 }
 
 function buildPuzzle() {
@@ -663,22 +806,43 @@ function swapPieces(piece1, piece2) {
     piece2.currentPos = tempPos;
 
     gameState.moves++;
+    gameState.movesRemaining--;
+    playClick();
     updateMoves();
     renderPuzzle();
 
-    if (checkWin()) onWin();
+    const anyCorrect = piece1.currentPos === piece1.correctPos || piece2.currentPos === piece2.correctPos;
+    if (anyCorrect) playCorrect();
+
+    if (checkWin()) {
+        onWin();
+    } else if (gameState.movesRemaining <= 0) {
+        onOutOfMoves();
+    }
 }
 
 function checkWin() {
     return gameState.pieces.every(p => p.currentPos === p.correctPos);
 }
 
+function onOutOfMoves() {
+    gameState.isCompleted = true;
+    stopTimer();
+    stopAmbient();
+    playOutOfMoves();
+    document.getElementById('out-of-moves-overlay').classList.add('active');
+}
+
 function onWin() {
     gameState.isCompleted = true;
     stopTimer();
+    stopAmbient();
+    playWin();
 
     setTimeout(() => {
         const image = gameState.selectedImage;
+        const name = playerName ? `¡Felicitaciones, ${playerName}!` : '¡Felicitaciones!';
+        document.querySelector('.win-title').textContent = `🎉 ${name}`;
 
         document.getElementById('win-image').src = gameState.currentImageUrl;
         document.querySelector('.win-landscape-name').textContent = image.name;
@@ -688,6 +852,10 @@ function onWin() {
         document.getElementById('stat-difficulty').textContent = DIFFICULTIES[gameState.gridSize].label;
 
         document.getElementById('btn-download').style.display = gameState.gridSize === 6 ? '' : 'none';
+
+        const items = IMAGES[gameState.currentCategory][gameState.currentCountry].items;
+        const nextImage = items[gameState.currentImageIndex + 1];
+        document.getElementById('btn-next-puzzle').style.display = nextImage ? '' : 'none';
 
         showScreen('win');
         createConfetti();
@@ -709,6 +877,7 @@ function shuffleArray(arr) {
 function shufflePuzzle() {
     gameState.selectedPiece = null;
     gameState.moves = 0;
+    gameState.movesRemaining = MOVE_LIMITS[gameState.gridSize];
     gameState.seconds = 0;
     stopTimer();
     updateMoves();
@@ -753,7 +922,10 @@ function formatTime(totalSeconds) {
 }
 
 function updateMoves() {
-    document.querySelector('#game-moves .info-text').textContent = `Movimientos: ${gameState.moves}`;
+    const rem = gameState.movesRemaining;
+    const el = document.querySelector('#game-moves .info-text');
+    el.textContent = `Movimientos: ${rem}`;
+    el.style.color = rem <= 5 ? '#ef4444' : rem <= 15 ? '#f59e0b' : '';
 }
 
 // ==========================================
