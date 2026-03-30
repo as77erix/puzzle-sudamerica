@@ -256,7 +256,7 @@ const DIFFICULTIES = {
 };
 
 // Move limits per difficulty (future: draw from global regen pool)
-const MOVE_LIMITS = { 3: 35, 4: 70, 5: 130, 6: 220 };
+const MOVE_LIMITS = { 3: 15, 4: 30, 5: 55, 6: 90 };
 
 // ==========================================
 // PLAYER
