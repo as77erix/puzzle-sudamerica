@@ -73,84 +73,84 @@ const IMAGES = {
         argentina: {
             flag: '🇦🇷', name: 'Argentina',
             items: [
-                { id: 'perito_moreno', name: 'Glaciar Perito Moreno', location: 'Santa Cruz, Patagonia', photo: 'V34MPSwaK7k' },
-                { id: 'iguazu', name: 'Cataratas del Iguazú', location: 'Misiones', photo: 'sK2s73nZwz0' },
-                { id: 'fitz_roy', name: 'Monte Fitz Roy', location: 'El Chaltén, Patagonia', photo: 'HazDeRk87oA' },
-                { id: 'nahuel_huapi', name: 'Lago Nahuel Huapi', location: 'Bariloche, Patagonia', photo: 'K_zV9qD53ZY' },
+                { id: 'perito_moreno', name: 'Glaciar Perito Moreno', location: 'Santa Cruz, Patagonia', photo: 'V34MPSwaK7k', facts: ['Es uno de los pocos glaciares del mundo que sigue creciendo en lugar de retroceder.', 'Su frente tiene 5 km de ancho y se eleva 60 metros sobre el agua del lago.', 'Cada ciertos años forma un dique natural sobre el Lago Argentino que colapsa espectacularmente.'] },
+                { id: 'iguazu', name: 'Cataratas del Iguazú', location: 'Misiones', photo: 'sK2s73nZwz0', facts: ['Son las cataratas más anchas del mundo, con 2,7 km de frente activo.', 'El nombre "Iguazú" en guaraní significa "agua grande".', 'Cuando las visitó Eleanor Roosevelt, exclamó: "¡Pobre Niágara!".'] },
+                { id: 'fitz_roy', name: 'Monte Fitz Roy', location: 'El Chaltén, Patagonia', photo: 'HazDeRk87oA', facts: ['Su nombre mapuche es "Chaltén", que significa "montaña que humea" por las nubes que lo rodean.', 'Es considerado uno de los picos más técnicamente difíciles de escalar del mundo.', 'Fue escalado por primera vez en 1952 por una expedición franco-argentina.'] },
+                { id: 'nahuel_huapi', name: 'Lago Nahuel Huapi', location: 'Bariloche, Patagonia', photo: 'K_zV9qD53ZY', facts: ['Su nombre en mapuche significa "isla del tigre" o "isla del puma".', 'Tiene más de 500 km² de superficie y 464 metros de profundidad máxima.', 'El Parque Nacional Nahuel Huapi fue el primero de Argentina, creado en 1934.'] },
             ]
         },
         brasil: {
             flag: '🇧🇷', name: 'Brasil',
             items: [
-                { id: 'cristo', name: 'Cristo Redentor', location: 'Río de Janeiro', photo: 'eVMLVyrf4g4' },
-                { id: 'lencois', name: 'Lençóis Maranhenses', location: 'Maranhão', photo: 'lOXd57n2hHU' },
-                { id: 'noronha', name: 'Fernando de Noronha', location: 'Pernambuco', photo: 'PUiEolgEgaE' },
-                { id: 'amazonia', name: 'Selva Amazónica', location: 'Amazonas', photo: 'AycIWyyCuVo' },
+                { id: 'cristo', name: 'Cristo Redentor', location: 'Río de Janeiro', photo: 'eVMLVyrf4g4', facts: ['Mide 38 metros de altura incluyendo el pedestal y es una de las 7 maravillas del mundo moderno.', 'Fue construido entre 1922 y 1931 con la participación del escultor francés Paul Landowski.', 'Sus brazos extendidos miden 28 metros de ancho y pesan 30 toneladas cada uno.'] },
+                { id: 'lencois', name: 'Lençóis Maranhenses', location: 'Maranhão', photo: 'lOXd57n2hHU', facts: ['A pesar de parecer un desierto, tiene lluvias estacionales que forman lagunas de agua cristalina.', 'Las lagunas desaparecen completamente en la época seca y vuelven a formarse cada año.', 'El nombre significa "sábanas de Maranhão" por el aspecto blanco ondulado de las dunas.'] },
+                { id: 'noronha', name: 'Fernando de Noronha', location: 'Pernambuco', photo: 'PUiEolgEgaE', facts: ['Es un archipiélago volcánico de 21 islas a 545 km de la costa.', 'El acceso está limitado a 420 visitantes por día para proteger su ecosistema marino.', 'Es reconocido por tener aguas con una visibilidad de hasta 50 metros de profundidad.'] },
+                { id: 'amazonia', name: 'Selva Amazónica', location: 'Amazonas', photo: 'AycIWyyCuVo', facts: ['Produce aproximadamente el 20% del oxígeno de la Tierra, por eso se la llama "el pulmón del planeta".', 'Alberga el 10% de todas las especies animales conocidas en el planeta.', 'El río Amazonas descarga más agua en el océano que los 7 ríos más grandes del mundo juntos.'] },
             ]
         },
         chile: {
             flag: '🇨🇱', name: 'Chile',
             items: [
-                { id: 'torres', name: 'Torres del Paine', location: 'Patagonia chilena', photo: 'rlHAG9QcldI' },
-                { id: 'atacama', name: 'Desierto de Atacama', location: 'Región de Antofagasta', photo: 'Qc6EZC7NWWw' },
-                { id: 'valle_luna', name: 'Valle de la Luna', location: 'Atacama', photo: 'TrWxMFWvk4Y' },
-                { id: 'pascua', name: 'Isla de Pascua', location: 'Rapa Nui', photo: 'thwOv7I363Y' },
+                { id: 'torres', name: 'Torres del Paine', location: 'Patagonia chilena', photo: 'rlHAG9QcldI', facts: ['Las torres son formaciones de granito que emergieron hace 12 millones de años.', 'El nombre "Paine" significa "azul" en la lengua del pueblo tehuelche.', 'El parque alberga pumas, guanacos, zorros y el majestuoso cóndor andino.'] },
+                { id: 'atacama', name: 'Desierto de Atacama', location: 'Región de Antofagasta', photo: 'Qc6EZC7NWWw', facts: ['Es el desierto no polar más árido del mundo.', 'Algunas zonas no han registrado lluvia en más de 500 años.', 'Cada ciertos años florece con el fenómeno del "desierto florido", cubriendo el suelo de color.'] },
+                { id: 'valle_luna', name: 'Valle de la Luna', location: 'Atacama', photo: 'TrWxMFWvk4Y', facts: ['Debe su nombre a su paisaje que evoca la superficie lunar.', 'Fue formado por millones de años de erosión del viento y el agua en la sal y arcilla.', 'Sus colores cambian dramáticamente al atardecer, pasando del ocre al violeta y el rojo.'] },
+                { id: 'pascua', name: 'Isla de Pascua', location: 'Rapa Nui', photo: 'thwOv7I363Y', facts: ['Sus famosas estatuas se llaman "moai" y pesan en promedio 14 toneladas.', 'Está a 3.700 km del territorio continental más cercano, siendo uno de los lugares más remotos del mundo.', 'Sus habitantes la llamaban "Te Pito o Te Henua": el ombligo del mundo.'] },
             ]
         },
         uruguay: {
             flag: '🇺🇾', name: 'Uruguay',
             items: [
-                { id: 'polonio', name: 'Cabo Polonio', location: 'Rocha', photo: 'FAqQVlNeSUg' },
-                { id: 'punta', name: 'Punta del Este', location: 'Maldonado', photo: 'jHz2WyDBVyo' },
-                { id: 'colonia_sunset', name: 'Colonia del Sacramento', location: 'Colonia', photo: 'wwBk0aCa7Gs' },
+                { id: 'polonio', name: 'Cabo Polonio', location: 'Rocha', photo: 'FAqQVlNeSUg', facts: ['Es una de las pocas zonas del mundo habitadas sin electricidad de red ni agua corriente.', 'Alberga una de las colonias de lobos marinos del sur más grandes de Sudamérica.', 'Solo se puede llegar en vehículos 4x4 especiales o caminando varios kilómetros por la playa.'] },
+                { id: 'punta', name: 'Punta del Este', location: 'Maldonado', photo: 'jHz2WyDBVyo', facts: ['Es conocida como la "Saint-Tropez de Sudamérica" por su vida nocturna y su exclusividad.', 'La escultura "La Mano" en la playa Brava fue creada por el artista chileno Mario Irarrázabal en 1982.', 'Su faro data de 1860 y es uno de los más antiguos en funcionamiento de Uruguay.'] },
+                { id: 'colonia_sunset', name: 'Colonia del Sacramento', location: 'Colonia', photo: 'wwBk0aCa7Gs', facts: ['Fue fundada por los portugueses en 1680, siendo la ciudad más antigua de Uruguay.', 'Su casco histórico fue declarado Patrimonio de la Humanidad por la UNESCO en 1995.', 'Está a solo 50 km de Buenos Aires, separada por el Río de la Plata.'] },
             ]
         },
         colombia: {
             flag: '🇨🇴', name: 'Colombia',
             items: [
-                { id: 'cocora', name: 'Valle del Cocora', location: 'Quindío', photo: 'akkbyynQtEg' },
-                { id: 'tayrona', name: 'Parque Tayrona', location: 'Magdalena', photo: 'gc5OYAll-rc' },
-                { id: 'cartagena_walls', name: 'Ciudad Amurallada', location: 'Cartagena', photo: 'PM95XBE1Xxk' },
-                { id: 'cano_cristales', name: 'Caño Cristales', location: 'Meta', photo: '5hcxlXRW_KM' },
+                { id: 'cocora', name: 'Valle del Cocora', location: 'Quindío', photo: 'akkbyynQtEg', facts: ['Las palmas de cera que crecen aquí son las más altas del mundo, llegando a 60 metros de altura.', 'La palma de cera es el árbol nacional de Colombia desde 1985.', 'El nombre "Cocora" significa "agua de la estrella verde" en lengua quimbaya.'] },
+                { id: 'tayrona', name: 'Parque Tayrona', location: 'Magdalena', photo: 'gc5OYAll-rc', facts: ['Combina selva tropical densa, montañas y playas caribeñas en un mismo parque nacional.', 'Fue hogar de la civilización Tayrona, que dejó vestigios arqueológicos aún visibles.', 'La Sierra Nevada de Santa Marta que lo enmarca es la montaña costera más alta del mundo.'] },
+                { id: 'cartagena_walls', name: 'Ciudad Amurallada', location: 'Cartagena', photo: 'PM95XBE1Xxk', facts: ['Sus murallas fueron construidas en el siglo XVII para proteger la ciudad de ataques piratas.', 'Fue declarada Patrimonio de la Humanidad por la UNESCO en 1984.', 'Era el principal puerto de salida del oro y la plata del Imperio español en América del Sur.'] },
+                { id: 'cano_cristales', name: 'Caño Cristales', location: 'Meta', photo: '5hcxlXRW_KM', facts: ['Es conocido como "el río de los cinco colores" y "el río más hermoso del mundo".', 'Sus colores rojos, amarillos y verdes se deben a una planta acuática única llamada Macarenia clavigera.', 'Solo exhibe sus colores entre junio y noviembre, cuando el nivel del agua es el ideal.'] },
             ]
         },
         peru: {
             flag: '🇵🇪', name: 'Perú',
             items: [
-                { id: 'machu_picchu', name: 'Machu Picchu', location: 'Cusco', photo: 'gQzlCU9_ItA' },
-                { id: 'rainbow', name: 'Montaña de Colores', location: 'Cusco', photo: 'kTbZ0n9MzqI' },
-                { id: 'huacachina', name: 'Huacachina', location: 'Ica', photo: 'Q-bULd2CYds' },
-                { id: 'titicaca', name: 'Lago Titicaca', location: 'Puno', photo: 'xq0MW-DM6Cc' },
+                { id: 'machu_picchu', name: 'Machu Picchu', location: 'Cusco', photo: 'gQzlCU9_ItA', facts: ['Fue construida alrededor de 1450 por el Inca Pachacútec y abandonada casi un siglo después.', 'Permaneció desconocida para el mundo occidental hasta que Hiram Bingham la redescubrió en 1911.', 'Está ubicada a 2.430 metros sobre el nivel del mar, en medio de las montañas de los Andes.'] },
+                { id: 'rainbow', name: 'Montaña de Colores', location: 'Cusco', photo: 'kTbZ0n9MzqI', facts: ['Su nombre oficial es Vinicunca y tiene 5.200 metros de altitud.', 'Sus colores son el resultado de la exposición de distintos minerales: hierro, azufre y cobre.', 'Estuvo cubierta de nieve hasta hace pocos años; el calentamiento global reveló sus colores.'] },
+                { id: 'huacachina', name: 'Huacachina', location: 'Ica', photo: 'Q-bULd2CYds', facts: ['Es un oasis natural rodeado de dunas que superan los 100 metros de altura.', 'La leyenda dice que la laguna se formó de las lágrimas de una princesa inca sorprendida bañándose.', 'Es uno de los pocos oasis naturales de toda América del Sur.'] },
+                { id: 'titicaca', name: 'Lago Titicaca', location: 'Puno', photo: 'xq0MW-DM6Cc', facts: ['Es el lago navegable más alto del mundo, a 3.812 metros sobre el nivel del mar.', 'En su interior viven los Uros, que construyen y habitan islas flotantes de totora.', 'Tiene 8.372 km² de superficie y es compartido entre Perú y Bolivia.'] },
             ]
         },
         bolivia: {
             flag: '🇧🇴', name: 'Bolivia',
             items: [
-                { id: 'uyuni', name: 'Salar de Uyuni', location: 'Potosí', photo: '1k-hqjlmBRE' },
-                { id: 'laguna_colorada', name: 'Laguna Colorada', location: 'Potosí', photo: 'Ni0fXNmEPJ4' },
-                { id: 'valle_luna_bo', name: 'Valle de la Luna', location: 'La Paz', photo: '0dqqcem_lWI' },
+                { id: 'uyuni', name: 'Salar de Uyuni', location: 'Potosí', photo: '1k-hqjlmBRE', facts: ['Es el desierto de sal más grande del mundo, con 10.582 km² de extensión.', 'Cuando llueve se convierte en el espejo natural más grande del planeta.', 'Contiene aproximadamente el 70% de las reservas mundiales conocidas de litio.'] },
+                { id: 'laguna_colorada', name: 'Laguna Colorada', location: 'Potosí', photo: 'Ni0fXNmEPJ4', facts: ['Su color rojizo intenso se debe a los pigmentos de algas microscópicas y sedimentos minerales.', 'Es el hábitat de tres especies de flamencos andinos que anidan en sus orillas.', 'Está ubicada a 4.278 metros sobre el nivel del mar, en el altiplano sur de Bolivia.'] },
+                { id: 'valle_luna_bo', name: 'Valle de la Luna', location: 'La Paz', photo: '0dqqcem_lWI', facts: ['Es una formación de arcillas y areniscas esculpidas por la erosión durante millones de años.', 'Está ubicado a solo 10 km del centro de La Paz, siendo un destino turístico muy accesible.', 'Sus agujas y cañones cambian de tonalidad según la luz del sol durante el día.'] },
             ]
         },
         ecuador: {
             flag: '🇪🇨', name: 'Ecuador',
             items: [
-                { id: 'galapagos', name: 'Islas Galápagos', location: 'Galápagos', photo: 'LJIjXgutX4g' },
-                { id: 'cotopaxi', name: 'Volcán Cotopaxi', location: 'Cotopaxi', photo: 'GvLG8Q-KQ6A' },
-                { id: 'amazon_ec', name: 'Selva Amazónica', location: 'Orellana', photo: 'zzzS45Cjhdw' },
+                { id: 'galapagos', name: 'Islas Galápagos', location: 'Galápagos', photo: 'LJIjXgutX4g', facts: ['Fueron el laboratorio natural que inspiró a Charles Darwin a desarrollar su teoría de la evolución.', 'Tienen especies únicas en el mundo como la iguana marina, la única que se alimenta en el mar.', 'Están a 1.000 km de la costa ecuatoriana y fueron declaradas Patrimonio de la Humanidad en 1978.'] },
+                { id: 'cotopaxi', name: 'Volcán Cotopaxi', location: 'Cotopaxi', photo: 'GvLG8Q-KQ6A', facts: ['Es uno de los volcanes activos más altos del mundo, con 5.897 metros de altura.', 'Su nombre en quechua significa "cuello de luna" o "luna de montaña".', 'Tiene un glaciar en su cima que podría generar lahares peligrosos si entrara en erupción.'] },
+                { id: 'amazon_ec', name: 'Selva Amazónica', location: 'Orellana', photo: 'zzzS45Cjhdw', facts: ['Ecuador tiene la mayor biodiversidad por kilómetro cuadrado de toda Sudamérica.', 'El Parque Nacional Yasuní es considerado uno de los lugares con más biodiversidad del planeta.', 'Alberga comunidades indígenas como los Waorani, que han vivido en la selva por siglos.'] },
             ]
         },
         venezuela: {
             flag: '🇻🇪', name: 'Venezuela',
             items: [
-                { id: 'angel_falls', name: 'Salto Ángel', location: 'Bolívar', photo: 'TwojIl0NzMY' },
-                { id: 'roraima', name: 'Tepuy Roraima', location: 'Gran Sabana', photo: 'lxmavRZKFJ4' },
+                { id: 'angel_falls', name: 'Salto Ángel', location: 'Bolívar', photo: 'TwojIl0NzMY', facts: ['Es la cascada más alta del mundo, con 979 metros de caída libre ininterrumpida.', 'Fue "descubierta" por el aviador estadounidense Jimmy Angel en 1933, quien aterrizó en su cima.', 'Su nombre en lengua pemón es "Kerepakupai Merú", que significa "salto del lugar más profundo".'] },
+                { id: 'roraima', name: 'Tepuy Roraima', location: 'Gran Sabana', photo: 'lxmavRZKFJ4', facts: ['Inspiró a Arthur Conan Doyle para escribir "El Mundo Perdido" en 1912.', 'Su cima es tan inaccesible que alberga especies de plantas y animales que no existen en ningún otro lugar.', 'Tiene más de 2.810 metros de altura y su meseta es casi completamente plana.'] },
             ]
         },
         paraguay: {
             flag: '🇵🇾', name: 'Paraguay',
             items: [
-                { id: 'ypacarai', name: 'Lago Ypacaraí', location: 'Cordillera', photo: 'https://upload.wikimedia.org/wikipedia/commons/8/81/Lago_Ypacarai_-_panoramio.jpg' },
-                { id: 'trinidad', name: 'Ruinas de Trinidad', location: 'Itapúa', photo: 'zsdDAztLRiE' },
+                { id: 'ypacarai', name: 'Lago Ypacaraí', location: 'Cordillera', photo: 'https://upload.wikimedia.org/wikipedia/commons/8/81/Lago_Ypacarai_-_panoramio.jpg', facts: ['Fue inmortalizado en la canción "India" de José Asunción Flores, considerada el segundo himno de Paraguay.', 'Tiene 21 km de largo y 5 km de ancho, siendo uno de los lagos más importantes del país.', 'La ciudad de San Bernardino en sus costas fue fundada por inmigrantes alemanes en 1881.'] },
+                { id: 'trinidad', name: 'Ruinas de Trinidad', location: 'Itapúa', photo: 'zsdDAztLRiE', facts: ['Son consideradas las ruinas jesuíticas mejor conservadas de toda Sudamérica.', 'Fueron construidas en el siglo XVIII y abandonadas tras la expulsión de los jesuitas en 1767.', 'Junto con las Ruinas de Jesús fueron declaradas Patrimonio de la Humanidad por la UNESCO en 1993.'] },
             ]
         },
     },
@@ -158,22 +158,22 @@ const IMAGES = {
         sudamerica: {
             flag: '🌎', name: 'Sudamérica',
             items: [
-                { id: 'jaguar', name: 'Jaguar', location: 'Pantanal, Brasil', photo: 'cC2I3_XvFDs' },
-                { id: 'tucan', name: 'Tucán', location: 'Selva tropical', photo: 'aIc0mwL-Tt0' },
-                { id: 'tapir', name: 'Tapir', location: 'Amazonia', photo: '1m8mdst8JTE' },
-                { id: 'condor', name: 'Cóndor Andino', location: 'Andes', photo: 'fGvDhUKTdUc' },
-                { id: 'capibara', name: 'Capibara', location: 'Humedales', photo: 'kl617diIESw' },
-                { id: 'pinguino', name: 'Pingüino de Magallanes', location: 'Tierra del Fuego', photo: 'zBVhMwd7g_A' },
-                { id: 'llama', name: 'Llama', location: 'Andes', photo: 'OQykYSpB5qQ' },
-                { id: 'flamingo', name: 'Flamenco Andino', location: 'Salar de Bolivia', photo: 't0_p8hlJiZw' },
-                { id: 'guacamayo', name: 'Guacamayo', location: 'Amazonia', photo: 'nzBMNJvWZAE' },
-                { id: 'oso_hormiguero', name: 'Oso Hormiguero', location: 'Pantanal, Brasil', photo: 'FmukIbiGMrk' },
-                { id: 'anaconda', name: 'Anaconda', location: 'Amazonia', photo: 'BJZK8bc2mhE' },
-                { id: 'rana_dardo', name: 'Rana Dardo', location: 'Amazonia', photo: '98dUMCI_KI8' },
-                { id: 'piranha', name: 'Piraña', location: 'Pantanal, Brasil', photo: 'sIzlhggRAqg' },
-                { id: 'caiman', name: 'Caimán Negro', location: 'Amazonia', photo: 'euquelL3lkw' },
-                { id: 'lobo_marino', name: 'Lobo Marino', location: 'Galápagos, Ecuador', photo: '1HaoVXAbsv4' },
-                { id: 'mono', name: 'Mono Araña', location: 'Amazonia', photo: 'R8w5il3avv8' },
+                { id: 'jaguar', name: 'Jaguar', location: 'Pantanal, Brasil', photo: 'cC2I3_XvFDs', facts: ['Es el felino más grande de América y el tercero más grande del mundo.', 'Nada muy bien y es uno de los pocos felinos que disfruta del agua.', 'Su nombre en guaraní, "yaguaretá", significa "el que mata de un solo salto".'] },
+                { id: 'tucan', name: 'Tucán', location: 'Selva tropical', photo: 'aIc0mwL-Tt0', facts: ['Su enorme pico de colores le sirve para regular su temperatura corporal.', 'A pesar del tamaño del pico, come con la punta y lanza la comida hacia atrás para tragarla.', 'Hay más de 40 especies de tucanes distribuidas en América Latina.'] },
+                { id: 'tapir', name: 'Tapir', location: 'Amazonia', photo: '1m8mdst8JTE', facts: ['Es el mamífero terrestre más grande de Sudamérica, pudiendo pesar hasta 300 kg.', 'Su pequeña trompa prensil es muy útil para agarrar hojas y frutas.', 'Está emparentado con los caballos y los rinocerontes, y no con los cerdos como parece.'] },
+                { id: 'condor', name: 'Cóndor Andino', location: 'Andes', photo: 'fGvDhUKTdUc', facts: ['Es el ave voladora más grande del mundo, con una envergadura de hasta 3,3 metros.', 'Puede vivir más de 70 años, siendo una de las aves con mayor longevidad.', 'Era considerado una divinidad que conectaba el mundo de los vivos con el cielo por los pueblos andinos.'] },
+                { id: 'capibara', name: 'Capibara', location: 'Humedales', photo: 'kl617diIESw', facts: ['Es el roedor más grande del mundo, puede pesar hasta 65 kg.', 'Son muy sociables y viven en grupos de hasta 20 individuos alrededor del agua.', 'Se relacionan pacíficamente con casi cualquier especie, incluso con depredadores cuando están saciados.'] },
+                { id: 'pinguino', name: 'Pingüino de Magallanes', location: 'Tierra del Fuego', photo: 'zBVhMwd7g_A', facts: ['Migra hasta 3.000 km en busca de alimento durante el invierno austral.', 'Forman parejas de por vida y vuelven cada año al mismo nido.', 'Su nombre se debe a Hernando de Magallanes, quien los describió por primera vez en 1520.'] },
+                { id: 'llama', name: 'Llama', location: 'Andes', photo: 'OQykYSpB5qQ', facts: ['Fue domesticada por los incas hace más de 5.000 años como animal de carga.', 'Puede cargar hasta el 30% de su peso corporal durante largas distancias.', 'Cuando se molesta o siente amenazada, escupe con notable precisión y alcance.'] },
+                { id: 'flamingo', name: 'Flamenco Andino', location: 'Salar de Bolivia', photo: 't0_p8hlJiZw', facts: ['Su color rosado no es genético: viene de los pigmentos de los crustáceos y algas que consume.', 'Puede vivir en lagunas con hasta 10 veces más sal que el agua del mar.', 'Duerme parado sobre una sola pata para conservar el calor corporal.'] },
+                { id: 'guacamayo', name: 'Guacamayo', location: 'Amazonia', photo: 'nzBMNJvWZAE', facts: ['Puede aprender a imitar palabras, frases y sonidos con gran precisión.', 'Forma parejas de por vida y se cuidan y acicalan mutuamente.', 'Su pico es tan fuerte que puede romper nueces con cáscara dura fácilmente.'] },
+                { id: 'oso_hormiguero', name: 'Oso Hormiguero', location: 'Pantanal, Brasil', photo: 'FmukIbiGMrk', facts: ['Come hasta 35.000 hormigas y termitas por día.', 'No tiene dientes: tritura los insectos con su musculosa molleja y los traga con la lengua.', 'Su lengua puede extenderse 60 cm y vibra hasta 150 veces por minuto.'] },
+                { id: 'anaconda', name: 'Anaconda', location: 'Amazonia', photo: 'BJZK8bc2mhE', facts: ['Es la serpiente más pesada del mundo, pudiendo superar los 200 kg.', 'No es venenosa: mata a sus presas por constricción, apretándolas hasta que dejan de respirar.', 'Puede pasar varios meses sin comer después de una presa de gran tamaño.'] },
+                { id: 'rana_dardo', name: 'Rana Dardo', location: 'Amazonia', photo: '98dUMCI_KI8', facts: ['Es uno de los animales más venenosos del planeta pese a medir apenas 5 cm.', 'Los indígenas usaban su veneno para envenenar las puntas de sus cerbatanas y flechas.', 'En cautiverio pierden su veneno al no consumir los insectos que lo producen.'] },
+                { id: 'piranha', name: 'Piraña', location: 'Pantanal, Brasil', photo: 'sIzlhggRAqg', facts: ['A pesar de su fama feroz, los ataques graves a humanos son extremadamente raros.', 'Tiene los dientes más afilados proporcionalmente de todos los peces de agua dulce.', 'Son omnívoras y también comen plantas, frutas caídas al agua y animales muertos.'] },
+                { id: 'caiman', name: 'Caimán Negro', location: 'Amazonia', photo: 'euquelL3lkw', facts: ['Es el depredador más grande de la cuenca amazónica.', 'Puede alcanzar los 5 metros de longitud y pesar hasta 400 kg.', 'A diferencia de los cocodrilos marinos, habita exclusivamente en agua dulce.'] },
+                { id: 'lobo_marino', name: 'Lobo Marino', location: 'Galápagos, Ecuador', photo: '1HaoVXAbsv4', facts: ['Puede bucear hasta 200 metros de profundidad en busca de peces.', 'Las hembras reconocen a sus crías entre miles de individuos por su voz característica.', 'En las Galápagos no temen a los humanos y suelen acercarse con curiosidad.'] },
+                { id: 'mono', name: 'Mono Araña', location: 'Amazonia', photo: 'R8w5il3avv8', facts: ['Tiene cinco extremidades funcionales: cuatro patas y una cola prensil tan hábil como una mano.', 'Es uno de los primates más inteligentes de América, capaz de usar herramientas rudimentarias.', 'Vive en grupos de hasta 30 individuos con complejas estructuras sociales y jerarquías.'] },
             ]
         }
     },
@@ -181,68 +181,68 @@ const IMAGES = {
         argentina: {
             flag: '🇦🇷', name: 'Argentina',
             items: [
-                { id: 'obelisco', name: 'Obelisco', location: 'Buenos Aires', photo: 'ekA3fTefJMA' },
-                { id: 'caminito', name: 'Caminito', location: 'La Boca, Buenos Aires', photo: 'fl3fdbbtj4Q' },
-                { id: 'puerto_madero', name: 'Puerto Madero', location: 'Buenos Aires', photo: 'VXSlXVlLLY4' },
+                { id: 'obelisco', name: 'Obelisco', location: 'Buenos Aires', photo: 'ekA3fTefJMA', facts: ['Fue construido en solo 31 días en 1936 para conmemorar el cuarto centenario de Buenos Aires.', 'Mide 67,5 metros de altura y es el símbolo más reconocible de la ciudad.', 'En cada festejo importante, los argentinos se reúnen espontáneamente a su alrededor.'] },
+                { id: 'caminito', name: 'Caminito', location: 'La Boca, Buenos Aires', photo: 'fl3fdbbtj4Q', facts: ['Sus casas de colores se pintaron originalmente con la pintura sobrante de los barcos del puerto.', 'Su nombre viene de una famosa canción de tango de 1926 compuesta por Juan de Dios Filiberto.', 'Es el barrio más fotografiado de Buenos Aires y cuna del tango rioplatense.'] },
+                { id: 'puerto_madero', name: 'Puerto Madero', location: 'Buenos Aires', photo: 'VXSlXVlLLY4', facts: ['Es el barrio más nuevo y uno de los más exclusivos de Buenos Aires, creado en los años 90.', 'Fue construido sobre antiguos depósitos portuarios que estuvieron abandonados décadas.', 'Alberga el Puente de la Mujer, una pasarela giratoria diseñada por Santiago Calatrava.'] },
             ]
         },
         brasil: {
             flag: '🇧🇷', name: 'Brasil',
             items: [
-                { id: 'pelourinho', name: 'Pelourinho', location: 'Salvador, Bahía', photo: 'BGD47PMGzyM' },
-                { id: 'rio_sugarloaf', name: 'Pan de Azúcar', location: 'Río de Janeiro', photo: 'P40XjykprjM' },
-                { id: 'sao_paulo', name: 'São Paulo', location: 'São Paulo', photo: '6OMe9rp3v9c' },
+                { id: 'pelourinho', name: 'Pelourinho', location: 'Salvador, Bahía', photo: 'BGD47PMGzyM', facts: ['Es el centro histórico colonial de Salvador y Patrimonio de la Humanidad desde 1985.', 'Su nombre significa "picota" en portugués, ya que allí se castigaba públicamente a los esclavizados.', 'Es el corazón de la cultura afrobrasileña, con música, capoeira y religiones de origen africano.'] },
+                { id: 'rio_sugarloaf', name: 'Pan de Azúcar', location: 'Río de Janeiro', photo: 'P40XjykprjM', facts: ['Su nombre en portugués es "Pão de Açúcar" y tiene 396 metros de altura sobre la bahía.', 'El teleférico que sube al cerro fue el primero de Brasil, inaugurado en 1912.', 'Desde su cima se ve toda la bahía de Guanabara, el Cristo Redentor y las playas de Río.'] },
+                { id: 'sao_paulo', name: 'São Paulo', location: 'São Paulo', photo: '6OMe9rp3v9c', facts: ['Es la ciudad más grande de Sudamérica, con más de 22 millones de habitantes en su área metropolitana.', 'Tiene la mayor flota de helicópteros privados del mundo, usados para evitar el tráfico.', 'Es el mayor polo económico y financiero de América Latina.'] },
             ]
         },
         chile: {
             flag: '🇨🇱', name: 'Chile',
             items: [
-                { id: 'santiago', name: 'Santiago', location: 'Región Metropolitana', photo: 'QH3rBhcJS54' },
-                { id: 'valparaiso', name: 'Valparaíso', location: 'Valparaíso', photo: 'H6KJ2D0LphU' },
-                { id: 'valparaiso2', name: 'Valparaíso Cerros', location: 'Valparaíso', photo: 'qGcIfPdQSb4' },
+                { id: 'santiago', name: 'Santiago', location: 'Región Metropolitana', photo: 'QH3rBhcJS54', facts: ['Está ubicada en un valle rodeado por la Cordillera de los Andes y la Cordillera de la Costa.', 'En días despejados se puede ver el Aconcagua —la montaña más alta de América— desde la ciudad.', 'Fue fundada por el conquistador español Pedro de Valdivia el 12 de febrero de 1541.'] },
+                { id: 'valparaiso', name: 'Valparaíso', location: 'Valparaíso', photo: 'H6KJ2D0LphU', facts: ['Es conocida como "La Joya del Pacífico" por sus coloridas casas en los cerros.', 'Fue declarada Patrimonio de la Humanidad por la UNESCO en 2003.', 'Pablo Neruda tenía una de sus casas preferidas aquí: La Sebastiana.'] },
+                { id: 'valparaiso2', name: 'Valparaíso Cerros', location: 'Valparaíso', photo: 'qGcIfPdQSb4', facts: ['Sus famosos ascensores (funiculares) fueron construidos entre 1883 y 1916 para subir los cerros.', 'La ciudad tiene más de 40 cerros habitados, cada uno con su propio carácter y nombre.', 'Fue uno de los puertos más importantes del mundo antes de la apertura del Canal de Panamá.'] },
             ]
         },
         colombia: {
             flag: '🇨🇴', name: 'Colombia',
             items: [
-                { id: 'bogota', name: 'Bogotá', location: 'Cundinamarca', photo: 'gdcT7prXMzE' },
-                { id: 'cartagena_street', name: 'Cartagena Colorida', location: 'Cartagena de Indias', photo: 'JINIW3yzobc' },
-                { id: 'guatape', name: 'Guatapé', location: 'Antioquia', photo: 'Q8HGO9en0sY' },
+                { id: 'bogota', name: 'Bogotá', location: 'Cundinamarca', photo: 'gdcT7prXMzE', facts: ['Está ubicada a 2.600 metros sobre el nivel del mar, siendo una de las capitales más altas del mundo.', 'Su Museo del Oro alberga la mayor colección de orfebrería precolombina del mundo.', 'Es la tercera ciudad más grande de Sudamérica y el principal centro cultural del país.'] },
+                { id: 'cartagena_street', name: 'Cartagena Colorida', location: 'Cartagena de Indias', photo: 'JINIW3yzobc', facts: ['Sus casas de colores brillantes son características del estilo colonial caribeño del siglo XVII.', 'Gabriel García Márquez ambientó varias de sus novelas en esta ciudad.', 'Fue durante siglos el principal puerto de exportación del oro del Imperio español.'] },
+                { id: 'guatape', name: 'Guatapé', location: 'Antioquia', photo: 'Q8HGO9en0sY', facts: ['La famosa Piedra del Peñol tiene 220 metros de altura y 740 escalones para llegar a la cima.', 'El embalse que rodea el pueblo fue creado artificialmente en los años 70 para generar electricidad.', 'Cada casa del centro tiene un zócalo pintado con figuras que representan escenas del dueño.'] },
             ]
         },
         peru: {
             flag: '🇵🇪', name: 'Perú',
             items: [
-                { id: 'cusco', name: 'Cusco', location: 'Plaza de Armas', photo: '2LydtNCRBv8' },
-                { id: 'lima', name: 'Lima Miraflores', location: 'Lima', photo: 'JvxnQV_gaO8' },
+                { id: 'cusco', name: 'Cusco', location: 'Plaza de Armas', photo: '2LydtNCRBv8', facts: ['Fue la capital del Imperio Inca y en quechua "Qusqu" significa "ombligo del mundo".', 'Está a 3.400 metros sobre el nivel del mar, en plena Cordillera de los Andes.', 'Muchas iglesias coloniales fueron construidas directamente sobre los cimientos de templos incas.'] },
+                { id: 'lima', name: 'Lima Miraflores', location: 'Lima', photo: 'JvxnQV_gaO8', facts: ['Lima es la segunda ciudad capital más grande del mundo ubicada en un desierto, después de El Cairo.', 'Miraflores tiene acantilados de hasta 70 metros que caen directamente sobre el océano Pacífico.', 'Lima concentra más de un tercio de la población total del Perú.'] },
             ]
         },
         uruguay: {
             flag: '🇺🇾', name: 'Uruguay',
             items: [
-                { id: 'colonia_colonial', name: 'Colonia del Sacramento', location: 'Colonia', photo: 'PWjA3zA497I' },
-                { id: 'punta_buildings', name: 'Punta del Este', location: 'Maldonado', photo: 'ehFgttlFJNA' },
-                { id: 'punta_skyline', name: 'Punta del Este Skyline', location: 'Maldonado', photo: 'gnwPEQZR9pk' },
+                { id: 'colonia_colonial', name: 'Colonia del Sacramento', location: 'Colonia', photo: 'PWjA3zA497I', facts: ['Sus calles empedradas con piedras traídas de Portugal son únicas en toda Sudamérica.', 'La Calle de los Suspiros es una de las más fotografiadas y reconocidas de Uruguay.', 'Fue disputada entre España y Portugal durante más de 100 años antes de pertenecer a Uruguay.'] },
+                { id: 'punta_buildings', name: 'Punta del Este', location: 'Maldonado', photo: 'ehFgttlFJNA', facts: ['Tiene más rascacielos por kilómetro cuadrado que cualquier otra ciudad de Sudamérica.', 'Es conocida como la "Marbella de Sudamérica" por su jet set internacional en verano.', 'Su nombre viene del cabo que forma el punto más oriental de Uruguay.'] },
+                { id: 'punta_skyline', name: 'Punta del Este Skyline', location: 'Maldonado', photo: 'gnwPEQZR9pk', facts: ['Concentra algunas de las propiedades más caras y exclusivas de toda Sudamérica.', 'La península separa las aguas más bravas del océano Atlántico de las tranquilas del Río de la Plata.', 'En enero recibe más turistas que toda la población de Uruguay.'] },
             ]
         },
         bolivia: {
             flag: '🇧🇴', name: 'Bolivia',
             items: [
-                { id: 'la_paz', name: 'La Paz', location: 'La Paz', photo: 'T_oeAGfY3MI' },
-                { id: 'sucre', name: 'Sucre', location: 'Chuquisaca', photo: 'P3kH_hH-4z4' },
+                { id: 'la_paz', name: 'La Paz', location: 'La Paz', photo: 'T_oeAGfY3MI', facts: ['Es la sede de gobierno más alta del mundo, a 3.640 metros sobre el nivel del mar.', 'Su sistema de teleféricos urbanos es el más extenso del mundo, con más de 30 km de líneas.', 'Está rodeada por el altiplano y vigila el nevado Illimani de 6.438 metros.'] },
+                { id: 'sucre', name: 'Sucre', location: 'Chuquisaca', photo: 'P3kH_hH-4z4', facts: ['Es la capital constitucional de Bolivia y fue declarada Patrimonio de la Humanidad en 1991.', 'Es conocida como "la ciudad blanca" por la obligación histórica de pintar sus edificios de blanco.', 'Aquí se firmó la Declaración de Independencia de Bolivia el 6 de agosto de 1825.'] },
             ]
         },
         ecuador: {
             flag: '🇪🇨', name: 'Ecuador',
             items: [
-                { id: 'quito', name: 'Quito', location: 'Pichincha', photo: 'IUwpdJVM4Fc' },
-                { id: 'cuenca', name: 'Cuenca', location: 'Azuay', photo: 'rI0arLMf4do' },
+                { id: 'quito', name: 'Quito', location: 'Pichincha', photo: 'IUwpdJVM4Fc', facts: ['Es la capital más alta del mundo en funciones, a 2.850 metros sobre el nivel del mar.', 'Su centro histórico fue el primero en ser declarado Patrimonio de la Humanidad por la UNESCO en 1978.', 'Está ubicada a tan solo 25 km del ecuador geográfico, pero su clima es primaveral todo el año.'] },
+                { id: 'cuenca', name: 'Cuenca', location: 'Azuay', photo: 'rI0arLMf4do', facts: ['Es la tercera ciudad más grande de Ecuador y Patrimonio de la Humanidad desde 1999.', 'Los famosos sombreros "Panama" son en realidad de origen ecuatoriano, fabricados en Cuenca.', 'El río Tomebamba que atraviesa la ciudad fue fundamental para la civilización Cañari.'] },
             ]
         },
         venezuela: {
             flag: '🇻🇪', name: 'Venezuela',
             items: [
-                { id: 'caracas', name: 'Caracas', location: 'Distrito Capital', photo: '8Pm2WioMBBQ' },
+                { id: 'caracas', name: 'Caracas', location: 'Distrito Capital', photo: '8Pm2WioMBBQ', facts: ['Está ubicada en un valle a solo 900 metros de altura pero a pocos kilómetros del mar Caribe.', 'Es la ciudad natal de Simón Bolívar, el Libertador que independizó cinco países de América del Sur.', 'Su teleférico del Warairarepano une el centro de la ciudad con la montaña y la costa en minutos.'] },
             ]
         },
     }
@@ -852,6 +852,15 @@ function onWin() {
         document.getElementById('stat-difficulty').textContent = DIFFICULTIES[gameState.gridSize].label;
 
         document.getElementById('btn-download').style.display = gameState.gridSize === 6 ? '' : 'none';
+
+        const facts = image.facts || [];
+        const factEl = document.getElementById('fun-fact');
+        if (facts.length > 0) {
+            document.getElementById('fun-fact-text').textContent = facts[Math.floor(Math.random() * facts.length)];
+            factEl.style.display = '';
+        } else {
+            factEl.style.display = 'none';
+        }
 
         const items = IMAGES[gameState.currentCategory][gameState.currentCountry].items;
         const nextImage = items[gameState.currentImageIndex + 1];
