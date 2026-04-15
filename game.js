@@ -6,10 +6,11 @@
 // CONFIG
 // ==========================================
 const UNSPLASH_ACCESS_KEY = 'Jxev90HPjzslJ7p06qmOmEILjjHYmKZaWDPWYJQVNBQ';
-const UNSPLASH_CACHE_KEY = 'puzzle_unsplash_cache_v5';
-const UNSPLASH_PARAMS = '?w=800&h=800&q=85&fit=crop&crop=attention&auto=format';
+const UNSPLASH_CACHE_KEY = 'puzzle_unsplash_cache_v6';
+const UNSPLASH_PARAMS = '&w=800&h=800&q=85&fit=crop&crop=entropy&auto=format';
 
-// Cache in memory + localStorage
+// Cache in memory + localStorage (limpiamos versiones anteriores)
+['v1','v2','v3','v4','v5'].forEach(v => localStorage.removeItem(`puzzle_unsplash_cache_${v}`));
 const photoCache = JSON.parse(localStorage.getItem(UNSPLASH_CACHE_KEY) || '{}');
 
 function saveCache() {
@@ -17,24 +18,34 @@ function saveCache() {
 }
 
 async function imgUrl(slug) {
+    // URLs completas (Wikimedia, etc.) → proxy wsrv.nl
     if (slug.startsWith('http')) {
         return `https://wsrv.nl/?url=${encodeURIComponent(slug)}&w=800&h=800&fit=cover&a=attention&output=jpg`;
     }
-    if (photoCache[slug]) return photoCache[slug];
+
+    // Cache válido (no cachear nulls ni placeholders)
+    if (photoCache[slug] && !photoCache[slug].includes('placeholder')) return photoCache[slug];
+
+    // Intentar construir URL de Unsplash CDN directamente sin API
+    const cdnUrl = `https://images.unsplash.com/${slug}${UNSPLASH_PARAMS}`;
 
     try {
+        // Verificar con API sólo para obtener la URL raw correcta
         const res = await fetch(
-            `https://api.unsplash.com/photos/${slug}?client_id=${UNSPLASH_ACCESS_KEY}`
+            `https://api.unsplash.com/photos/${slug}?client_id=${UNSPLASH_ACCESS_KEY}`,
+            { signal: AbortSignal.timeout(5000) }
         );
-        if (!res.ok) throw new Error('fetch failed');
+        if (!res.ok) throw new Error('api limit');
         const data = await res.json();
-        const baseUrl = data.urls.raw.split('?')[0];
-        const url = baseUrl + UNSPLASH_PARAMS;
+        const url = data.urls.regular; // usar .regular en vez de .raw (más estable)
         photoCache[slug] = url;
         saveCache();
         return url;
     } catch {
-        return `https://via.placeholder.com/900x600/1a2035/94a3b8?text=${encodeURIComponent(slug)}`;
+        // Fallback: URL directa del CDN de Unsplash (sin API key)
+        photoCache[slug] = cdnUrl;
+        saveCache();
+        return cdnUrl;
     }
 }
 
@@ -381,50 +392,13 @@ function startAmbient() {
     try {
         const ctx = getAudioCtx();
 
-        // Master con compressor para dinámica natural
-        const compressor = ctx.createDynamicsCompressor();
-        compressor.threshold.value = -24;
-        compressor.ratio.value = 4;
-        compressor.connect(ctx.destination);
-
         const master = ctx.createGain();
         master.gain.setValueAtTime(0, ctx.currentTime);
-        master.gain.linearRampToValueAtTime(0.07, ctx.currentTime + 4); // fade-in suave
-        master.connect(compressor);
+        master.gain.linearRampToValueAtTime(0.012, ctx.currentTime + 6); // fade-in muy gradual
+        master.connect(ctx.destination);
 
-        // --- Viento: ruido blanco filtrado ---
-        const sampleRate = ctx.sampleRate;
-        const bufferSize = sampleRate * 3;
-        const noiseBuffer = ctx.createBuffer(1, bufferSize, sampleRate);
-        const data = noiseBuffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-
-        const noise = ctx.createBufferSource();
-        noise.buffer = noiseBuffer;
-        noise.loop = true;
-
-        // Bandpass centrado en zona "viento suave" (~300 Hz)
-        const bandpass = ctx.createBiquadFilter();
-        bandpass.type = 'bandpass';
-        bandpass.frequency.value = 320;
-        bandpass.Q.value = 0.4;
-
-        // Segundo filtro lowpass para suavizar aún más
-        const lowpass = ctx.createBiquadFilter();
-        lowpass.type = 'lowpass';
-        lowpass.frequency.value = 800;
-
-        const noiseGain = ctx.createGain();
-        noiseGain.gain.value = 0.55;
-
-        noise.connect(bandpass);
-        bandpass.connect(lowpass);
-        lowpass.connect(noiseGain);
-        noiseGain.connect(master);
-        noise.start();
-
-        // --- Pad suave: 3 notas con triangle wave (mucho más suave que sine) ---
-        [130.81, 196.00, 261.63].forEach((freq, idx) => {
+        // Acorde Am suave: A2, E3, A3, C4 — triangle wave, calidez sin estridencia
+        [110, 164.81, 220, 261.63].forEach((freq, idx) => {
             const osc = ctx.createOscillator();
             const lfo = ctx.createOscillator();
             const lfoGain = ctx.createGain();
@@ -433,12 +407,15 @@ function startAmbient() {
             osc.type = 'triangle';
             osc.frequency.value = freq;
 
-            lfo.frequency.value = 0.06 + idx * 0.03; // LFO muy lento
-            lfoGain.gain.value = freq * 0.002;
+            // LFO muy lento para vibrato apenas perceptible
+            lfo.type = 'sine';
+            lfo.frequency.value = 0.04 + idx * 0.01;
+            lfoGain.gain.value = freq * 0.0015;
             lfo.connect(lfoGain);
             lfoGain.connect(osc.frequency);
 
-            oscGain.gain.value = 0.12;
+            // Volumen decreciente en armónicos superiores
+            oscGain.gain.value = [0.35, 0.25, 0.20, 0.20][idx];
             osc.connect(oscGain);
             oscGain.connect(master);
 
@@ -447,7 +424,7 @@ function startAmbient() {
             ambientNodes.push(osc, lfo, lfoGain, oscGain);
         });
 
-        ambientNodes.push(noise, bandpass, lowpass, noiseGain, master, compressor);
+        ambientNodes.push(master);
     } catch(e) {}
 }
 
