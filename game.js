@@ -144,6 +144,8 @@ const IMAGES = {
             items: [
                 { id: 'angel_falls', name: 'Salto Ángel', location: 'Bolívar', photo: 'TwojIl0NzMY', facts: ['Es la cascada más alta del mundo, con 979 metros de caída libre ininterrumpida.', 'Fue "descubierta" por el aviador estadounidense Jimmy Angel en 1933, quien aterrizó en su cima.', 'Su nombre en lengua pemón es "Kerepakupai Merú", que significa "salto del lugar más profundo".'] },
                 { id: 'roraima', name: 'Tepuy Roraima', location: 'Gran Sabana', photo: 'lxmavRZKFJ4', facts: ['Inspiró a Arthur Conan Doyle para escribir "El Mundo Perdido" en 1912.', 'Su cima es tan inaccesible que alberga especies de plantas y animales que no existen en ningún otro lugar.', 'Tiene más de 2.810 metros de altura y su meseta es casi completamente plana.'] },
+                { id: 'morrocoy', name: 'Parque Nacional Morrocoy', location: 'Falcón', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Morrocoy_cayo_sombrero.jpg/1280px-Morrocoy_cayo_sombrero.jpg', facts: ['Sus cayos de arena blanca y aguas turquesas lo convierten en uno de los destinos de playa más bellos del Caribe sur.', 'Tiene más de 30 cayos e islotes accesibles solo por lancha.', 'Es hogar de una enorme variedad de corales, pelícanos y flamencos.'] },
+                { id: 'medanos', name: 'Médanos de Coro', location: 'Falcón', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/M%C3%A9danos_de_coro.jpg/1280px-M%C3%A9danos_de_coro.jpg', facts: ['Son el único desierto de arena de Venezuela, con dunas que superan los 40 metros de altura.', 'Fueron declarados Parque Nacional en 1974 para proteger este ecosistema único.', 'Las dunas se desplazan constantemente por la acción del viento alisio del noreste.'] },
             ]
         },
         paraguay: {
@@ -151,6 +153,32 @@ const IMAGES = {
             items: [
                 { id: 'ypacarai', name: 'Lago Ypacaraí', location: 'Cordillera', photo: 'https://upload.wikimedia.org/wikipedia/commons/8/81/Lago_Ypacarai_-_panoramio.jpg', facts: ['Fue inmortalizado en la canción "India" de José Asunción Flores, considerada el segundo himno de Paraguay.', 'Tiene 21 km de largo y 5 km de ancho, siendo uno de los lagos más importantes del país.', 'La ciudad de San Bernardino en sus costas fue fundada por inmigrantes alemanes en 1881.'] },
                 { id: 'trinidad', name: 'Ruinas de Trinidad', location: 'Itapúa', photo: 'zsdDAztLRiE', facts: ['Son consideradas las ruinas jesuíticas mejor conservadas de toda Sudamérica.', 'Fueron construidas en el siglo XVIII y abandonadas tras la expulsión de los jesuitas en 1767.', 'Junto con las Ruinas de Jesús fueron declaradas Patrimonio de la Humanidad por la UNESCO en 1993.'] },
+                { id: 'pantanal_py', name: 'Pantanal Paraguayo', location: 'Alto Paraguay', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Pantanal_-_Rio_Paraguay.jpg/1280px-Pantanal_-_Rio_Paraguay.jpg', facts: ['Es la porción paraguaya del mayor humedal del mundo, compartido con Brasil y Bolivia.', 'Alberga más de 650 especies de aves, incluyendo el jabirú, el ave voladora más grande de América.', 'Los estancieros del Chaco lo llaman "el mar interior" cuando se inunda en época de lluvias.'] },
+                { id: 'saltos_monday', name: 'Saltos del Monday', location: 'Alto Paraná', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Salto_Monday.jpg/1280px-Salto_Monday.jpg', facts: ['Tienen 45 metros de altura y 120 metros de ancho, siendo las segundas cataratas más grandes de Paraguay.', 'Están a solo 10 km de Ciudad del Este y son un destino turístico muy accesible.', 'Su nombre en guaraní significa "río de los ladrones" por antiguas leyendas indígenas.'] },
+            ]
+        },
+        guyana: {
+            flag: '🇬🇾', name: 'Guyana',
+            items: [
+                { id: 'kaieteur', name: 'Cataratas Kaieteur', location: 'Potaro-Siparuni', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Kaieteur_Falls.jpg/800px-Kaieteur_Falls.jpg', facts: ['Con 226 metros de caída libre, es una de las cascadas de mayor volumen y altura del mundo.', 'Es 5 veces más alta que las Cataratas del Niágara y el doble de alta que las Victoria.', 'La rana dorada de Kaieteur vive exclusivamente en las bromelias que rodean la cascada.'] },
+                { id: 'rupununi', name: 'Sabana del Rupununi', location: 'Alto Takutu', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Rupununi_savanna%2C_Guyana.jpg/1280px-Rupununi_savanna%2C_Guyana.jpg', facts: ['Es una enorme sabana tropical que se extiende entre la selva amazónica y los tepuyes.', 'Está habitada por pueblos indígenas Makushi y Wapishana que mantienen sus tradiciones ancestrales.', 'Durante la temporada de lluvias, los ríos se desbordan creando un ecosistema acuático impresionante.'] },
+                { id: 'shell_beach', name: 'Shell Beach', location: 'Barima-Waini', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Shell_Beach_Guyana.jpg/1024px-Shell_Beach_Guyana.jpg', facts: ['Es un sitio de anidación de cuatro especies de tortugas marinas en peligro de extinción.', 'La playa tiene 145 km de largo y está cubierta de millones de conchas marinas.', 'Forma parte de una reserva protegida desde 2011 para conservar las tortugas.'] },
+            ]
+        },
+        surinam: {
+            flag: '🇸🇷', name: 'Surinam',
+            items: [
+                { id: 'reserva_central', name: 'Reserva Natural de Surinam Central', location: 'Sipaliwini', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Voltzberg_Suriname.jpg/1280px-Voltzberg_Suriname.jpg', facts: ['Con 1,6 millones de hectáreas, cubre el 12% del territorio del país y es Patrimonio de la Humanidad.', 'Contiene el inselberg Voltzberg, un domo de granito de 240 metros que emerge de la selva virgen.', 'Alberga más de 5.000 especies de plantas vasculares, muchas aún sin catalogar por la ciencia.'] },
+                { id: 'brownsberg', name: 'Parque Natural Brownsberg', location: 'Brokopondo', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Brownsberg3.jpg/1280px-Brownsberg3.jpg', facts: ['Está en una meseta de 500 metros de altura con cascadas que caen hacia el embalse Brokopondo.', 'Es uno de los destinos de ecoturismo más populares de Surinam, a solo 130 km de Paramaribo.', 'Su selva tropical alberga monos aulladores, tucanes y jaguares.'] },
+                { id: 'raleighvallen', name: 'Raleighvallen', location: 'Sipaliwini', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Raleighvallen-3.JPG/1280px-Raleighvallen-3.JPG', facts: ['Es accesible solo por avioneta o por río, lo que mantiene su selva casi intacta.', 'El inselberg Voltzberg en su interior ofrece una vista de 360° de selva virgen ininterrumpida.', 'Es hogar del gallito de roca guayanés, con su espectacular plumaje naranja brillante.'] },
+            ]
+        },
+        trinidad: {
+            flag: '🇹🇹', name: 'Trinidad y Tobago',
+            items: [
+                { id: 'pigeon_point', name: 'Pigeon Point', location: 'Tobago', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Pigeon_Point%2C_Tobago.jpg/1280px-Pigeon_Point%2C_Tobago.jpg', facts: ['Es la playa más fotografiada del Caribe, con su icónico muelle de techo de palma.', 'Sus aguas cristalinas y arena blanca la convierten en la postal más reconocida de Trinidad y Tobago.', 'Desde aquí se accede al Nylon Pool, una piscina natural de aguas poco profundas en medio del mar.'] },
+                { id: 'pitch_lake', name: 'Lago de Asfalto', location: 'La Brea, Trinidad', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Pitch_Lake_2.jpg/1280px-Pitch_Lake_2.jpg', facts: ['Es el mayor depósito natural de asfalto del mundo, con más de 40 hectáreas de superficie.', 'Se estima que contiene 10 millones de toneladas de asfalto y ha sido explotado desde 1595.', 'Walter Raleigh lo usó para calafatear sus barcos durante su exploración de las Américas.'] },
+                { id: 'caroni_swamp', name: 'Pantano Caroni', location: 'Trinidad', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Scarlet_Ibis_at_Caroni_Swamp.jpg/1280px-Scarlet_Ibis_at_Caroni_Swamp.jpg', facts: ['Es el hogar del ibis escarlata, el ave nacional de Trinidad y Tobago.', 'Al atardecer, miles de ibis regresan a dormir en los manglares creando un espectáculo rojo brillante.', 'El pantano tiene 12.000 hectáreas de manglares que protegen la costa de huracanes.'] },
             ]
         },
     },
@@ -174,6 +202,10 @@ const IMAGES = {
                 { id: 'caiman', name: 'Caimán Negro', location: 'Amazonia', photo: 'euquelL3lkw', facts: ['Es el depredador más grande de la cuenca amazónica.', 'Puede alcanzar los 5 metros de longitud y pesar hasta 400 kg.', 'A diferencia de los cocodrilos marinos, habita exclusivamente en agua dulce.'] },
                 { id: 'lobo_marino', name: 'Lobo Marino', location: 'Galápagos, Ecuador', photo: '1HaoVXAbsv4', facts: ['Puede bucear hasta 200 metros de profundidad en busca de peces.', 'Las hembras reconocen a sus crías entre miles de individuos por su voz característica.', 'En las Galápagos no temen a los humanos y suelen acercarse con curiosidad.'] },
                 { id: 'mono', name: 'Mono Araña', location: 'Amazonia', photo: 'R8w5il3avv8', facts: ['Tiene cinco extremidades funcionales: cuatro patas y una cola prensil tan hábil como una mano.', 'Es uno de los primates más inteligentes de América, capaz de usar herramientas rudimentarias.', 'Vive en grupos de hasta 30 individuos con complejas estructuras sociales y jerarquías.'] },
+                { id: 'vicuna', name: 'Vicuña', location: 'Andes, Perú', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Vicugna_vicugna_-_Lauca_National_Park.jpg/1280px-Vicugna_vicugna_-_Lauca_National_Park.jpg', facts: ['Su lana es la más fina y costosa del mundo, más suave que el cashmere.', 'Aparece en el escudo nacional de Perú como símbolo de la riqueza animal del país.', 'Vive a más de 4.000 metros de altura y fue sagrada para los incas.'] },
+                { id: 'delfin_rosado', name: 'Delfín Rosado', location: 'Amazonia', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Inia_geoffrensis2.jpg/1280px-Inia_geoffrensis2.jpg', facts: ['Es el delfín de río más grande del mundo, puede medir hasta 2,5 metros.', 'Su color rosado se intensifica cuando está excitado o activo, como un rubor natural.', 'En la mitología amazónica se transforma en un hombre apuesto que seduce a las mujeres.'] },
+                { id: 'oso_anteojos', name: 'Oso de Anteojos', location: 'Andes', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Spectacled_Bear_-_Houston_Zoo.jpg/800px-Spectacled_Bear_-_Houston_Zoo.jpg', facts: ['Es la única especie de oso en Sudamérica y está en peligro de extinción.', 'Las marcas claras alrededor de sus ojos son únicas en cada individuo, como huellas dactilares.', 'Es principalmente herbívoro y puede trepar árboles de hasta 30 metros para buscar frutas.'] },
+                { id: 'armadillo', name: 'Armadillo', location: 'Gran Chaco', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Nine-banded_Armadillo.jpg/1280px-Nine-banded_Armadillo.jpg', facts: ['Su armadura ósea es única entre los mamíferos y lo protege de la mayoría de depredadores.', 'El armadillo de nueve bandas siempre tiene cuatrillizos genéticamente idénticos.', 'Puede contener la respiración hasta 6 minutos para cruzar ríos caminando por el fondo.'] },
             ]
         }
     },
@@ -215,6 +247,7 @@ const IMAGES = {
             items: [
                 { id: 'cusco', name: 'Cusco', location: 'Plaza de Armas', photo: '2LydtNCRBv8', facts: ['Fue la capital del Imperio Inca y en quechua "Qusqu" significa "ombligo del mundo".', 'Está a 3.400 metros sobre el nivel del mar, en plena Cordillera de los Andes.', 'Muchas iglesias coloniales fueron construidas directamente sobre los cimientos de templos incas.'] },
                 { id: 'lima', name: 'Lima Miraflores', location: 'Lima', photo: 'JvxnQV_gaO8', facts: ['Lima es la segunda ciudad capital más grande del mundo ubicada en un desierto, después de El Cairo.', 'Miraflores tiene acantilados de hasta 70 metros que caen directamente sobre el océano Pacífico.', 'Lima concentra más de un tercio de la población total del Perú.'] },
+                { id: 'arequipa', name: 'Arequipa', location: 'Arequipa', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Plaza_de_Armas_de_Arequipa.jpg/1280px-Plaza_de_Armas_de_Arequipa.jpg', facts: ['Es conocida como la "Ciudad Blanca" por sus edificios construidos con sillar, piedra volcánica blanca.', 'Está dominada por el volcán Misti de 5.822 metros, que enmarca la ciudad como un telón de fondo.', 'Su centro histórico fue declarado Patrimonio de la Humanidad por la UNESCO en 2000.'] },
             ]
         },
         uruguay: {
@@ -230,6 +263,7 @@ const IMAGES = {
             items: [
                 { id: 'la_paz', name: 'La Paz', location: 'La Paz', photo: 'T_oeAGfY3MI', facts: ['Es la sede de gobierno más alta del mundo, a 3.640 metros sobre el nivel del mar.', 'Su sistema de teleféricos urbanos es el más extenso del mundo, con más de 30 km de líneas.', 'Está rodeada por el altiplano y vigila el nevado Illimani de 6.438 metros.'] },
                 { id: 'sucre', name: 'Sucre', location: 'Chuquisaca', photo: 'P3kH_hH-4z4', facts: ['Es la capital constitucional de Bolivia y fue declarada Patrimonio de la Humanidad en 1991.', 'Es conocida como "la ciudad blanca" por la obligación histórica de pintar sus edificios de blanco.', 'Aquí se firmó la Declaración de Independencia de Bolivia el 6 de agosto de 1825.'] },
+                { id: 'cochabamba', name: 'Cochabamba', location: 'Cochabamba', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Cristo_de_la_Concordia_Cochabamba.jpg/800px-Cristo_de_la_Concordia_Cochabamba.jpg', facts: ['Su Cristo de la Concordia mide 34,2 metros, siendo más alto que el Cristo Redentor de Río.', 'Es conocida como la "Ciudad Jardín" por su clima primaveral todo el año a 2.500 metros de altura.', 'Es la capital gastronómica de Bolivia, famosa por su variedad de platos tradicionales.'] },
             ]
         },
         ecuador: {
@@ -237,12 +271,44 @@ const IMAGES = {
             items: [
                 { id: 'quito', name: 'Quito', location: 'Pichincha', photo: 'IUwpdJVM4Fc', facts: ['Es la capital más alta del mundo en funciones, a 2.850 metros sobre el nivel del mar.', 'Su centro histórico fue el primero en ser declarado Patrimonio de la Humanidad por la UNESCO en 1978.', 'Está ubicada a tan solo 25 km del ecuador geográfico, pero su clima es primaveral todo el año.'] },
                 { id: 'cuenca', name: 'Cuenca', location: 'Azuay', photo: 'rI0arLMf4do', facts: ['Es la tercera ciudad más grande de Ecuador y Patrimonio de la Humanidad desde 1999.', 'Los famosos sombreros "Panama" son en realidad de origen ecuatoriano, fabricados en Cuenca.', 'El río Tomebamba que atraviesa la ciudad fue fundamental para la civilización Cañari.'] },
+                { id: 'guayaquil', name: 'Guayaquil', location: 'Guayas', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Malecon2000_Guayaquil.jpg/1280px-Malecon2000_Guayaquil.jpg', facts: ['Es la ciudad más grande y poblada de Ecuador, con más de 2,7 millones de habitantes.', 'El Malecón 2000 es un paseo de 2,5 km junto al río Guayas que revitalizó la ciudad.', 'Es el principal puerto del país y motor económico del Ecuador.'] },
             ]
         },
         venezuela: {
             flag: '🇻🇪', name: 'Venezuela',
             items: [
                 { id: 'caracas', name: 'Caracas', location: 'Distrito Capital', photo: '8Pm2WioMBBQ', facts: ['Está ubicada en un valle a solo 900 metros de altura pero a pocos kilómetros del mar Caribe.', 'Es la ciudad natal de Simón Bolívar, el Libertador que independizó cinco países de América del Sur.', 'Su teleférico del Warairarepano une el centro de la ciudad con la montaña y la costa en minutos.'] },
+                { id: 'merida', name: 'Mérida', location: 'Mérida', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/M%C3%A9rida_Venezuela_2.jpg/1280px-M%C3%A9rida_Venezuela_2.jpg', facts: ['Tiene el teleférico más alto y segundo más largo del mundo, subiendo hasta los 4.765 metros.', 'Es la capital universitaria de Venezuela, con una vida cultural y estudiantil muy activa.', 'Está rodeada por la Sierra Nevada con picos que superan los 5.000 metros de altura.'] },
+                { id: 'maracaibo', name: 'Maracaibo', location: 'Zulia', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Puente_General_Rafael_Urdaneta.jpg/1280px-Puente_General_Rafael_Urdaneta.jpg', facts: ['Su puente sobre el lago es uno de los más largos de Sudamérica con 8,7 km.', 'El Lago de Maracaibo es el más grande de toda Sudamérica con 13.210 km².', 'Es una de las ciudades más calurosas del continente, con promedios de 35°C todo el año.'] },
+            ]
+        },
+        paraguay: {
+            flag: '🇵🇾', name: 'Paraguay',
+            items: [
+                { id: 'asuncion', name: 'Asunción', location: 'Distrito Capital', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Asunci%C3%B3n_Panor%C3%A1mica.jpg/1280px-Asunci%C3%B3n_Panor%C3%A1mica.jpg', facts: ['Es conocida como "Madre de Ciudades" por ser base de las expediciones que fundaron otras ciudades coloniales.', 'Fue fundada el 15 de agosto de 1537, siendo una de las ciudades más antiguas de Sudamérica.', 'La bahía de Asunción sobre el río Paraguay es el corazón histórico y comercial del país.'] },
+                { id: 'encarnacion', name: 'Encarnación', location: 'Itapúa', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Costanera_de_Encarnaci%C3%B3n.jpg/1280px-Costanera_de_Encarnaci%C3%B3n.jpg', facts: ['Es conocida como la "Perla del Sur" y capital del carnaval paraguayo.', 'Su costanera sobre el río Paraná es una de las obras urbanas más modernas del país.', 'Es puerta de entrada a las ruinas jesuíticas de Trinidad y Jesús, Patrimonio de la Humanidad.'] },
+                { id: 'ciudad_del_este', name: 'Ciudad del Este', location: 'Alto Paraná', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Ciudad_del_Este_Paraguay.jpg/1280px-Ciudad_del_Este_Paraguay.jpg', facts: ['Es la segunda ciudad más grande de Paraguay y uno de los centros comerciales más activos del mundo.', 'El Puente de la Amistad que la une con Foz do Iguazú tiene un tránsito de miles de personas diarias.', 'Está en la Triple Frontera entre Paraguay, Brasil y Argentina.'] },
+            ]
+        },
+        guyana: {
+            flag: '🇬🇾', name: 'Guyana',
+            items: [
+                { id: 'georgetown', name: 'Georgetown', location: 'Demerara-Mahaica', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/St._George%27s_Cathedral%2C_Georgetown%2C_Guyana.jpg/800px-St._George%27s_Cathedral%2C_Georgetown%2C_Guyana.jpg', facts: ['La Catedral de San Jorge es una de las iglesias de madera más altas del mundo con 43 metros.', 'Es la única capital de Sudamérica donde el inglés es el idioma oficial.', 'Gran parte de la ciudad está por debajo del nivel del mar, protegida por diques y canales holandeses.'] },
+                { id: 'stabroek', name: 'Mercado Stabroek', location: 'Georgetown', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Stabroek_Market.jpg/1024px-Stabroek_Market.jpg', facts: ['Es el mercado más grande y emblemático de Guyana, construido en hierro fundido en 1881.', 'Su torre del reloj de estilo victoriano es el punto de referencia más reconocido de Georgetown.', 'Aquí se mezclan las culturas india, africana, amerindia y europea que forman la identidad guyanesa.'] },
+            ]
+        },
+        surinam: {
+            flag: '🇸🇷', name: 'Surinam',
+            items: [
+                { id: 'paramaribo', name: 'Paramaribo', location: 'Paramaribo', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Paramaribo_waterkant.JPG/1280px-Paramaribo_waterkant.JPG', facts: ['Su centro histórico es Patrimonio de la Humanidad desde 2002 por su arquitectura colonial holandesa.', 'Es la única capital del mundo donde conviven una sinagoga y una mezquita una al lado de la otra.', 'El neerlandés es el idioma oficial, siendo el único país de habla holandesa en Sudamérica.'] },
+                { id: 'fort_zeelandia', name: 'Fort Zeelandia', location: 'Paramaribo', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Fort_Zeelandia_Paramaribo.JPG/1280px-Fort_Zeelandia_Paramaribo.JPG', facts: ['Es la fortaleza más antigua de Surinam, construida por los ingleses en 1651 y tomada por los holandeses.', 'Hoy es el Museo de Surinam y alberga la historia colonial y de independencia del país.', 'Desde sus murallas se tiene una vista panorámica del río Surinam y la ciudad.'] },
+            ]
+        },
+        trinidad: {
+            flag: '🇹🇹', name: 'Trinidad y Tobago',
+            items: [
+                { id: 'port_of_spain', name: 'Puerto España', location: 'Trinidad', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Port_of_spain_trinidad.jpg/1280px-Port_of_spain_trinidad.jpg', facts: ['Es la capital y centro financiero del Caribe anglófono, con una arquitectura que mezcla colonial y moderno.', 'Su carnaval es considerado el más grande del Caribe y uno de los más coloridos del mundo.', 'El steelpan (tambor de acero) fue inventado aquí, siendo el único instrumento acústico del siglo XX.'] },
+                { id: 'scarborough', name: 'Scarborough', location: 'Tobago', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Scarborough%2C_Tobago.jpg/1280px-Scarborough%2C_Tobago.jpg', facts: ['Es la capital de Tobago y tiene el Fort King George del siglo XVIII con vistas espectaculares.', 'Tobago tiene la selva tropical protegida más antigua del hemisferio occidental, desde 1776.', 'La isla es mucho más tranquila que Trinidad y es el destino de playa preferido del país.'] },
             ]
         },
     }
