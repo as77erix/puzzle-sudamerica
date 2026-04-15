@@ -380,25 +380,74 @@ function startAmbient() {
     if (!soundEnabled || ambientNodes.length > 0) return;
     try {
         const ctx = getAudioCtx();
+
+        // Master con compressor para dinámica natural
+        const compressor = ctx.createDynamicsCompressor();
+        compressor.threshold.value = -24;
+        compressor.ratio.value = 4;
+        compressor.connect(ctx.destination);
+
         const master = ctx.createGain();
-        master.gain.value = 0.035;
-        master.connect(ctx.destination);
+        master.gain.setValueAtTime(0, ctx.currentTime);
+        master.gain.linearRampToValueAtTime(0.07, ctx.currentTime + 4); // fade-in suave
+        master.connect(compressor);
+
+        // --- Viento: ruido blanco filtrado ---
+        const sampleRate = ctx.sampleRate;
+        const bufferSize = sampleRate * 3;
+        const noiseBuffer = ctx.createBuffer(1, bufferSize, sampleRate);
+        const data = noiseBuffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+
+        const noise = ctx.createBufferSource();
+        noise.buffer = noiseBuffer;
+        noise.loop = true;
+
+        // Bandpass centrado en zona "viento suave" (~300 Hz)
+        const bandpass = ctx.createBiquadFilter();
+        bandpass.type = 'bandpass';
+        bandpass.frequency.value = 320;
+        bandpass.Q.value = 0.4;
+
+        // Segundo filtro lowpass para suavizar aún más
+        const lowpass = ctx.createBiquadFilter();
+        lowpass.type = 'lowpass';
+        lowpass.frequency.value = 800;
+
+        const noiseGain = ctx.createGain();
+        noiseGain.gain.value = 0.55;
+
+        noise.connect(bandpass);
+        bandpass.connect(lowpass);
+        lowpass.connect(noiseGain);
+        noiseGain.connect(master);
+        noise.start();
+
+        // --- Pad suave: 3 notas con triangle wave (mucho más suave que sine) ---
         [130.81, 196.00, 261.63].forEach((freq, idx) => {
             const osc = ctx.createOscillator();
             const lfo = ctx.createOscillator();
             const lfoGain = ctx.createGain();
-            lfo.frequency.value = 0.12 + idx * 0.05;
-            lfoGain.gain.value = freq * 0.004;
+            const oscGain = ctx.createGain();
+
+            osc.type = 'triangle';
+            osc.frequency.value = freq;
+
+            lfo.frequency.value = 0.06 + idx * 0.03; // LFO muy lento
+            lfoGain.gain.value = freq * 0.002;
             lfo.connect(lfoGain);
             lfoGain.connect(osc.frequency);
-            osc.type = 'sine';
-            osc.frequency.value = freq;
-            osc.connect(master);
+
+            oscGain.gain.value = 0.12;
+            osc.connect(oscGain);
+            oscGain.connect(master);
+
             lfo.start();
             osc.start();
-            ambientNodes.push(osc, lfo);
+            ambientNodes.push(osc, lfo, lfoGain, oscGain);
         });
-        ambientNodes.push(master);
+
+        ambientNodes.push(noise, bandpass, lowpass, noiseGain, master, compressor);
     } catch(e) {}
 }
 
@@ -553,7 +602,16 @@ async function renderCountryCards() {
         card.addEventListener('click', () => selectCountry(countryId));
         container.appendChild(card);
 
-        imgUrl(country.items[0].photo).then(url => { img.src = url; });
+        imgUrl(country.items[0].photo).then(url => {
+            img.src = url;
+            img.onerror = () => {
+                img.style.display = 'none';
+                const ph = document.createElement('div');
+                ph.className = 'img-placeholder';
+                ph.innerHTML = `<span>${country.flag}</span>`;
+                card.insertBefore(ph, card.firstChild);
+            };
+        });
     });
 }
 
@@ -682,7 +740,16 @@ function renderImageCards() {
         card.addEventListener('click', () => startGame(item));
         container.appendChild(card);
 
-        imgUrl(item.photo).then(url => { img.src = url; });
+        imgUrl(item.photo).then(url => {
+            img.src = url;
+            img.onerror = () => {
+                img.style.display = 'none';
+                const ph = document.createElement('div');
+                ph.className = 'img-placeholder';
+                ph.innerHTML = `<span>${item.name}</span>`;
+                card.insertBefore(ph, card.firstChild);
+            };
+        });
     });
 }
 
