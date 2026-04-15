@@ -18,7 +18,10 @@ function saveCache() {
 }
 
 async function imgUrl(slug) {
-    // URLs completas (Wikimedia, etc.) → proxy wsrv.nl
+    // URLs de Wikimedia: usar directamente (soportan CORS, no necesitan proxy)
+    if (slug.includes('wikimedia.org')) return slug;
+
+    // Otras URLs completas → proxy wsrv.nl para crop cuadrado
     if (slug.startsWith('http')) {
         return `https://wsrv.nl/?url=${encodeURIComponent(slug)}&w=800&h=800&fit=cover&a=attention&output=jpg`;
     }
@@ -394,7 +397,7 @@ function startAmbient() {
 
         const master = ctx.createGain();
         master.gain.setValueAtTime(0, ctx.currentTime);
-        master.gain.linearRampToValueAtTime(0.012, ctx.currentTime + 6); // fade-in muy gradual
+        master.gain.linearRampToValueAtTime(0.05, ctx.currentTime + 6); // fade-in muy gradual
         master.connect(ctx.destination);
 
         // Acorde Am suave: A2, E3, A3, C4 — triangle wave, calidez sin estridencia
@@ -484,7 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initParticles();
     renderCategoryCards();
     initEventListeners();
-    if (!playerName) showNameModal();
+    showNameModal(); // Siempre pedir nick al iniciar (con nombre guardado pre-llenado)
     document.getElementById('btn-mute').textContent = soundEnabled ? '🔊' : '🔇';
 });
 
@@ -601,15 +604,21 @@ function selectCountry(countryId) {
 // EVENT LISTENERS
 // ==========================================
 function showNameModal() {
+    const input = document.getElementById('player-name-input');
+    if (playerName) input.value = playerName; // pre-llenar con nombre guardado
     document.getElementById('name-modal').classList.add('active');
-    document.getElementById('player-name-input').focus();
+    input.focus();
+    input.select(); // seleccionar texto para reemplazarlo fácilmente
 }
 
 function savePlayerName() {
     const input = document.getElementById('player-name-input').value.trim();
-    if (!input) return;
-    playerName = input;
-    localStorage.setItem('puzzle_player_name', playerName);
+    // Si no escribe nada pero ya tiene nombre guardado, mantener el existente
+    if (!input && !playerName) return;
+    if (input) {
+        playerName = input;
+        localStorage.setItem('puzzle_player_name', playerName);
+    }
     document.getElementById('name-modal').classList.remove('active');
 }
 
