@@ -9,8 +9,9 @@ const UNSPLASH_ACCESS_KEY = 'Jxev90HPjzslJ7p06qmOmEILjjHYmKZaWDPWYJQVNBQ';
 const UNSPLASH_CACHE_KEY = 'puzzle_unsplash_cache_v6';
 const UNSPLASH_PARAMS = '?w=800&h=800&q=85&fit=crop&crop=entropy&auto=format';
 
-// Local images bundled with the game (no API needed for these)
+// Local images bundled with the game (no API needed)
 const LOCAL_IMAGES = {
+    // Originales con nombre descriptivo
     'V34MPSwaK7k': 'images/perito_moreno.png',
     'sK2s73nZwz0': 'images/iguazu_falls.png',
     'HazDeRk87oA': 'images/fitz_roy.png',
@@ -19,6 +20,56 @@ const LOCAL_IMAGES = {
     'lOXd57n2hHU': 'images/lencois_maranhenses.png',
     'PUiEolgEgaE': 'images/fernando_noronha.png',
     'AycIWyyCuVo': 'images/amazonia.png',
+    // Descargadas
+    '0dqqcem_lWI': 'images/0dqqcem_lWI.jpg',
+    '1HaoVXAbsv4': 'images/1HaoVXAbsv4.jpg',
+    '1k-hqjlmBRE': 'images/1k-hqjlmBRE.jpg',
+    '1m8mdst8JTE': 'images/1m8mdst8JTE.jpg',
+    '2LydtNCRBv8': 'images/2LydtNCRBv8.jpg',
+    '5hcxlXRW_KM': 'images/5hcxlXRW_KM.jpg',
+    '6OMe9rp3v9c': 'images/6OMe9rp3v9c.jpg',
+    '8Pm2WioMBBQ': 'images/8Pm2WioMBBQ.jpg',
+    '98dUMCI_KI8': 'images/98dUMCI_KI8.jpg',
+    'aIc0mwL-Tt0': 'images/aIc0mwL-Tt0.jpg',
+    'akkbyynQtEg': 'images/akkbyynQtEg.jpg',
+    'BGD47PMGzyM': 'images/BGD47PMGzyM.jpg',
+    'BJZK8bc2mhE': 'images/BJZK8bc2mhE.jpg',
+    'cC2I3_XvFDs': 'images/cC2I3_XvFDs.jpg',
+    'ehFgttlFJNA': 'images/ehFgttlFJNA.jpg',
+    'ekA3fTefJMA': 'images/ekA3fTefJMA.jpg',
+    'euquelL3lkw': 'images/euquelL3lkw.jpg',
+    'FAqQVlNeSUg': 'images/FAqQVlNeSUg.jpg',
+    'fGvDhUKTdUc': 'images/fGvDhUKTdUc.jpg',
+    'fl3fdbbtj4Q': 'images/fl3fdbbtj4Q.jpg',
+    'FmukIbiGMrk': 'images/FmukIbiGMrk.jpg',
+    'gc5OYAll-rc': 'images/gc5OYAll-rc.jpg',
+    'gdcT7prXMzE': 'images/gdcT7prXMzE.jpg',
+    'gnwPEQZR9pk': 'images/gnwPEQZR9pk.jpg',
+    'gQzlCU9_ItA': 'images/gQzlCU9_ItA.jpg',
+    'GvLG8Q-KQ6A': 'images/GvLG8Q-KQ6A.jpg',
+    'H6KJ2D0LphU': 'images/H6KJ2D0LphU.jpg',
+    'IUwpdJVM4Fc': 'images/IUwpdJVM4Fc.jpg',
+    'jHz2WyDBVyo': 'images/jHz2WyDBVyo.jpg',
+    'JINIW3yzobc': 'images/JINIW3yzobc.jpg',
+    'JvxnQV_gaO8': 'images/JvxnQV_gaO8.jpg',
+    'kl617diIESw': 'images/kl617diIESw.jpg',
+    'kTbZ0n9MzqI': 'images/kTbZ0n9MzqI.jpg',
+    'LJIjXgutX4g': 'images/LJIjXgutX4g.jpg',
+    'lxmavRZKFJ4': 'images/lxmavRZKFJ4.jpg',
+    'Ni0fXNmEPJ4': 'images/Ni0fXNmEPJ4.jpg',
+    'nzBMNJvWZAE': 'images/nzBMNJvWZAE.jpg',
+    'OQykYSpB5qQ': 'images/OQykYSpB5qQ.jpg',
+    'P3kH_hH-4z4': 'images/P3kH_hH-4z4.jpg',
+    'P40XjykprjM': 'images/P40XjykprjM.jpg',
+    'PM95XBE1Xxk': 'images/PM95XBE1Xxk.jpg',
+    'PWjA3zA497I': 'images/PWjA3zA497I.jpg',
+    'Q8HGO9en0sY': 'images/Q8HGO9en0sY.jpg',
+    'Q-bULd2CYds': 'images/Q-bULd2CYds.jpg',
+    'Qc6EZC7NWWw': 'images/Qc6EZC7NWWw.jpg',
+    'qGcIfPdQSb4': 'images/qGcIfPdQSb4.jpg',
+    'QH3rBhcJS54': 'images/QH3rBhcJS54.jpg',
+    'R8w5il3avv8': 'images/R8w5il3avv8.jpg',
+    'rI0arLMf4do': 'images/rI0arLMf4do.jpg',
 };
 
 // Cache in memory + localStorage (limpiamos versiones anteriores)
