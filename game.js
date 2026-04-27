@@ -70,6 +70,19 @@ const LOCAL_IMAGES = {
     'QH3rBhcJS54': 'images/QH3rBhcJS54.jpg',
     'R8w5il3avv8': 'images/R8w5il3avv8.jpg',
     'rI0arLMf4do': 'images/rI0arLMf4do.jpg',
+    'rlHAG9QcldI': 'images/rlHAG9QcldI.jpg',
+    'sIzlhggRAqg': 'images/sIzlhggRAqg.jpg',
+    't0_p8hlJiZw': 'images/t0_p8hlJiZw.jpg',
+    'thwOv7I363Y': 'images/thwOv7I363Y.jpg',
+    'T_oeAGfY3MI': 'images/T_oeAGfY3MI.jpg',
+    'TrWxMFWvk4Y': 'images/TrWxMFWvk4Y.jpg',
+    'TwojIl0NzMY': 'images/TwojIl0NzMY.jpg',
+    'VXSlXVlLLY4': 'images/VXSlXVlLLY4.jpg',
+    'wwBk0aCa7Gs': 'images/wwBk0aCa7Gs.jpg',
+    'xq0MW-DM6Cc': 'images/xq0MW-DM6Cc.jpg',
+    'zBVhMwd7g_A': 'images/zBVhMwd7g_A.jpg',
+    'zsdDAztLRiE': 'images/zsdDAztLRiE.jpg',
+    'zzzS45Cjhdw': 'images/zzzS45Cjhdw.jpg',
 };
 
 // Cache in memory + localStorage (limpiamos versiones anteriores)
