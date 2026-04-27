@@ -7,7 +7,19 @@
 // ==========================================
 const UNSPLASH_ACCESS_KEY = 'Jxev90HPjzslJ7p06qmOmEILjjHYmKZaWDPWYJQVNBQ';
 const UNSPLASH_CACHE_KEY = 'puzzle_unsplash_cache_v6';
-const UNSPLASH_PARAMS = '&w=800&h=800&q=85&fit=crop&crop=entropy&auto=format';
+const UNSPLASH_PARAMS = '?w=800&h=800&q=85&fit=crop&crop=entropy&auto=format';
+
+// Local images bundled with the game (no API needed for these)
+const LOCAL_IMAGES = {
+    'V34MPSwaK7k': 'images/perito_moreno.png',
+    'sK2s73nZwz0': 'images/iguazu_falls.png',
+    'HazDeRk87oA': 'images/fitz_roy.png',
+    'K_zV9qD53ZY': 'images/bariloche_lakes.png',
+    'eVMLVyrf4g4': 'images/cristo_redentor.png',
+    'lOXd57n2hHU': 'images/lencois_maranhenses.png',
+    'PUiEolgEgaE': 'images/fernando_noronha.png',
+    'AycIWyyCuVo': 'images/amazonia.png',
+};
 
 // Cache in memory + localStorage (limpiamos versiones anteriores)
 ['v1','v2','v3','v4','v5'].forEach(v => localStorage.removeItem(`puzzle_unsplash_cache_${v}`));
@@ -17,7 +29,13 @@ function saveCache() {
     localStorage.setItem(UNSPLASH_CACHE_KEY, JSON.stringify(photoCache));
 }
 
+function fallbackSvg(label) {
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='800'><rect width='800' height='800' fill='%231a2035'/><text x='400' y='410' text-anchor='middle' font-family='sans-serif' font-size='28' fill='%2394a3b8'>${encodeURIComponent(label)}</text></svg>`;
+    return `data:image/svg+xml,${svg}`;
+}
+
 async function imgUrl(slug) {
+    if (LOCAL_IMAGES[slug]) return LOCAL_IMAGES[slug];
     // URLs de Wikimedia: usar directamente (soportan CORS, no necesitan proxy)
     if (slug.includes('wikimedia.org')) return slug;
 
@@ -45,10 +63,14 @@ async function imgUrl(slug) {
         saveCache();
         return url;
     } catch {
-        // Fallback: URL directa del CDN de Unsplash (sin API key)
-        photoCache[slug] = cdnUrl;
-        saveCache();
-        return cdnUrl;
+        // Fallback 1: URL directa del CDN de Unsplash (sin API key)
+        if (cdnUrl && !cdnUrl.includes('undefined')) {
+            photoCache[slug] = cdnUrl;
+            saveCache();
+            return cdnUrl;
+        }
+        // Fallback 2: SVG inline
+        return fallbackSvg(slug);
     }
 }
 
@@ -348,6 +370,7 @@ let playerName = localStorage.getItem('puzzle_player_name') || '';
 // ==========================================
 let audioCtx = null;
 let ambientNodes = [];
+let ambientInterval = null;
 let soundEnabled = localStorage.getItem('puzzle_sound') !== '0';
 
 function getAudioCtx() {
@@ -391,47 +414,44 @@ function playOutOfMoves() {
 }
 
 function startAmbient() {
-    if (!soundEnabled || ambientNodes.length > 0) return;
+    if (!soundEnabled || ambientInterval !== null) return;
     try {
         const ctx = getAudioCtx();
+        // Escala pentatónica de Do mayor — cualquier combinación suena armoniosa
+        const notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25];
+        let tick = 0;
 
-        const master = ctx.createGain();
-        master.gain.setValueAtTime(0, ctx.currentTime);
-        master.gain.linearRampToValueAtTime(0.05, ctx.currentTime + 6); // fade-in muy gradual
-        master.connect(ctx.destination);
+        function chime() {
+            if (!soundEnabled) return;
+            tick++;
+            const count = tick % 5 === 0 ? 3 : tick % 3 === 0 ? 2 : 1;
+            for (let i = 0; i < count; i++) {
+                const freq = notes[Math.floor(Math.random() * notes.length)];
+                try {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.type = 'sine';
+                    osc.frequency.value = freq;
+                    const t = ctx.currentTime + i * 0.14;
+                    gain.gain.setValueAtTime(0.0001, t);
+                    gain.gain.linearRampToValueAtTime(0.04, t + 0.06);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, t + 1.8);
+                    osc.start(t);
+                    osc.stop(t + 1.9);
+                } catch(e) {}
+            }
+        }
 
-        // Acorde Am suave: A2, E3, A3, C4 — triangle wave, calidez sin estridencia
-        [110, 164.81, 220, 261.63].forEach((freq, idx) => {
-            const osc = ctx.createOscillator();
-            const lfo = ctx.createOscillator();
-            const lfoGain = ctx.createGain();
-            const oscGain = ctx.createGain();
-
-            osc.type = 'triangle';
-            osc.frequency.value = freq;
-
-            // LFO muy lento para vibrato apenas perceptible
-            lfo.type = 'sine';
-            lfo.frequency.value = 0.04 + idx * 0.01;
-            lfoGain.gain.value = freq * 0.0015;
-            lfo.connect(lfoGain);
-            lfoGain.connect(osc.frequency);
-
-            // Volumen decreciente en armónicos superiores
-            oscGain.gain.value = [0.35, 0.25, 0.20, 0.20][idx];
-            osc.connect(oscGain);
-            oscGain.connect(master);
-
-            lfo.start();
-            osc.start();
-            ambientNodes.push(osc, lfo, lfoGain, oscGain);
-        });
-
-        ambientNodes.push(master);
+        ambientInterval = setInterval(chime, 1100);
+        ambientNodes = [{ stop: () => {}, disconnect: () => {} }];
+        chime();
     } catch(e) {}
 }
 
 function stopAmbient() {
+    if (ambientInterval !== null) { clearInterval(ambientInterval); ambientInterval = null; }
     ambientNodes.forEach(n => { try { n.stop(); } catch(e) {} try { n.disconnect(); } catch(e) {} });
     ambientNodes = [];
 }
