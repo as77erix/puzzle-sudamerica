@@ -29,48 +29,29 @@ function saveCache() {
     localStorage.setItem(UNSPLASH_CACHE_KEY, JSON.stringify(photoCache));
 }
 
-function fallbackSvg(label) {
-    const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='800'><rect width='800' height='800' fill='%231a2035'/><text x='400' y='410' text-anchor='middle' font-family='sans-serif' font-size='28' fill='%2394a3b8'>${encodeURIComponent(label)}</text></svg>`;
-    return `data:image/svg+xml,${svg}`;
-}
-
 async function imgUrl(slug) {
     if (LOCAL_IMAGES[slug]) return LOCAL_IMAGES[slug];
-    // URLs de Wikimedia: usar directamente (soportan CORS, no necesitan proxy)
-    if (slug.includes('wikimedia.org')) return slug;
-
-    // Otras URLs completas → proxy wsrv.nl para crop cuadrado
-    if (slug.startsWith('http')) {
-        return `https://wsrv.nl/?url=${encodeURIComponent(slug)}&w=800&h=800&fit=cover&a=attention&output=jpg`;
-    }
-
-    // Cache válido (no cachear nulls ni placeholders)
-    if (photoCache[slug] && !photoCache[slug].includes('placeholder')) return photoCache[slug];
-
-    // Intentar construir URL de Unsplash CDN directamente sin API
-    const cdnUrl = `https://images.unsplash.com/${slug}${UNSPLASH_PARAMS}`;
+    if (slug.startsWith('http')) return slug;
+    if (photoCache[slug]) return photoCache[slug];
 
     try {
-        // Verificar con API sólo para obtener la URL raw correcta
         const res = await fetch(
             `https://api.unsplash.com/photos/${slug}?client_id=${UNSPLASH_ACCESS_KEY}`,
             { signal: AbortSignal.timeout(5000) }
         );
         if (!res.ok) throw new Error('api limit');
         const data = await res.json();
-        const url = data.urls.regular; // usar .regular en vez de .raw (más estable)
+        const url = data.urls.regular;
         photoCache[slug] = url;
         saveCache();
         return url;
     } catch {
-        // Fallback 1: URL directa del CDN de Unsplash (sin API key)
-        if (cdnUrl && !cdnUrl.includes('undefined')) {
-            photoCache[slug] = cdnUrl;
-            saveCache();
-            return cdnUrl;
-        }
-        // Fallback 2: SVG inline
-        return fallbackSvg(slug);
+        // API falló (rate limit u otro error) → picsum: gratis, sin auth,
+        // determinístico por seed (mismo slug = misma imagen siempre)
+        const url = `https://picsum.photos/seed/${slug}/800/800`;
+        photoCache[slug] = url;
+        saveCache();
+        return url;
     }
 }
 
