@@ -288,6 +288,74 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Crédito AUVANCE */
+.auvance-credit {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    padding: 2.5rem 1rem 0.5rem;
+    color: var(--text-primary);
+}
+
+.auvance-credit__link {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.5;
+    transition: opacity 0.25s ease;
+}
+
+.auvance-credit__link:hover,
+.auvance-credit__link:focus-visible {
+    opacity: 1;
+}
+
+.auvance-credit__by {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+.auvance-credit__by::before,
+.auvance-credit__by::after {
+    content: '';
+    width: 1.75rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.4;
+}
+
+.auvance-credit__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.auvance-credit__mark {
+    height: 15px;
+    width: auto;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.auvance-credit__link:hover .auvance-credit__mark {
+    transform: translateY(-2px);
+}
+
+.auvance-credit__name {
+    font-family: Montserrat, 'Outfit', 'Segoe UI', system-ui, sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.26em;
+    margin-right: -0.26em;
+}
+
 /* ========================================
    THEME SELECTOR
    ======================================== */
